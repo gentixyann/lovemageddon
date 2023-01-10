@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-// プロバイダー。この部分は別ファイルで切り出すべき？
-final numberProvider = StateProvider<int?>((ref) {
-  // 変化するデータ
-  return 5;
-});
+import 'package:lovemageddon/features/woman_name/woman_name_screen.dart';
+import 'package:lovemageddon/providers/providers.dart';
 
 class NumberMembersScreen extends ConsumerStatefulWidget {
   const NumberMembersScreen({super.key});
@@ -18,8 +14,9 @@ class NumberMembersScreen extends ConsumerStatefulWidget {
 class _NumberMembersScreen extends ConsumerState<NumberMembersScreen> {
   List<int> items = [3, 4, 5];
 
-  void confirmNumber(WidgetRef ref) {
-    final notifier = ref.read(numberProvider.notifier);
+  void moveStep(BuildContext ctx) {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (ctx) => const WomanNameScreen()));
   }
 
   @override
@@ -36,7 +33,7 @@ class _NumberMembersScreen extends ConsumerState<NumberMembersScreen> {
               '女性5人と男性5人なら「5」って具合に',
             ),
             const Text(
-              'ラブマゲドンしたい人数を入力してな',
+              '2人1組でラブマゲドンしたい人数を入力してな',
             ),
             Text(
               numberOfMember.toString(),
@@ -63,7 +60,7 @@ class _NumberMembersScreen extends ConsumerState<NumberMembersScreen> {
             SizedBox(
               width: _screenSize.width * 0.7,
               child: ElevatedButton(
-                onPressed: () => confirmNumber(ref),
+                onPressed: () => moveStep(context),
                 style: ElevatedButton.styleFrom(
                   minimumSize: const Size(double.infinity, 50),
                   shape: RoundedRectangleBorder(
