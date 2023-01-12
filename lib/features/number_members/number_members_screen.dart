@@ -16,7 +16,7 @@ class _NumberMembersScreen extends ConsumerState<NumberMembersScreen> {
 
   void moveStep(BuildContext ctx) {
     Navigator.push(
-        context, MaterialPageRoute(builder: (ctx) => const WomanNameScreen()));
+        ctx, MaterialPageRoute(builder: (ctx) => const WomanNameScreen()));
   }
 
   @override

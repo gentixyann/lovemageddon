@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:lovemageddon/features/man_name/man_name_screen.dart';
 import 'package:lovemageddon/providers/providers.dart';
 
 class WomanNameScreen extends ConsumerWidget {
   const WomanNameScreen({super.key});
+
+  void moveStep(BuildContext ctx) {
+    Navigator.push(
+        ctx, MaterialPageRoute(builder: (ctx) => const ManNameScreen()));
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -21,7 +27,6 @@ class WomanNameScreen extends ConsumerWidget {
           const Text(
             '参加する女性陣の名前を入力してな〜',
           ),
-          Text(numberOfMember.toString()),
           SizedBox(
             width: _screenSize.width * 0.8,
             height: _screenSize.height * 0.4,
@@ -43,7 +48,12 @@ class WomanNameScreen extends ConsumerWidget {
             width: _screenSize.width * 0.7,
             child: ElevatedButton(
               onPressed: () {
-                print(_nameController[0].text);
+                final nameList = [
+                  for (int i = 0; i < numberOfMember; i++)
+                    _nameController[i].text
+                ];
+                ref.read(womanNameProvider.notifier).state = nameList;
+                moveStep(context);
               },
               style: ElevatedButton.styleFrom(
                 minimumSize: const Size(double.infinity, 50),
