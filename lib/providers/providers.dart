@@ -9,3 +9,8 @@ final numberProvider = StateProvider<int?>((ref) {
 final womanNameProvider = StateProvider<List<String>>((ref) {
   return [];
 });
+
+// 男性参加者の名前
+final manNameProvider = StateProvider<List<String>>((ref) {
+  return [];
+});
