@@ -14,3 +14,8 @@ final womanNameProvider = StateProvider<List<String>>((ref) {
 final manNameProvider = StateProvider<List<String>>((ref) {
   return [];
 });
+
+// 女性参加者の選んだ相手
+final womanSelectedProvider = StateProvider<Map<String, dynamic>>((ref) {
+  return {};
+});
