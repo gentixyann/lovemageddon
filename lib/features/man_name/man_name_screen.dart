@@ -17,7 +17,7 @@ class ManNameScreen extends ConsumerWidget {
     final numberOfMember = ref.watch(numberProvider);
 
     List<TextEditingController> _nameController =
-        List.generate(numberOfMember!, (i) => TextEditingController());
+        List.generate(numberOfMember, (i) => TextEditingController());
 
     return Scaffold(
       body: Center(

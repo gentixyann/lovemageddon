@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lovemageddon/features/woman_name/woman_name_screen.dart';
 import 'package:lovemageddon/providers/providers.dart';
@@ -13,6 +12,7 @@ class NumberMembersScreen extends ConsumerStatefulWidget {
 
 class _NumberMembersScreen extends ConsumerState<NumberMembersScreen> {
   List<int> items = [3, 4, 5];
+  int? _selectedItem;
 
   void moveStep(BuildContext ctx) {
     Navigator.push(
@@ -39,11 +39,13 @@ class _NumberMembersScreen extends ConsumerState<NumberMembersScreen> {
               numberOfMember.toString(),
             ),
             const SizedBox(height: 15),
-            Container(
-                width: _screenSize.width * 0.2,
+            SizedBox(
+                width: _screenSize.width * 0.4,
                 child: DropdownButton(
+                  hint: const Text('人数を選んで'),
                   isExpanded: true,
-                  value: ref.watch(numberProvider),
+                  value: _selectedItem,
+                  // value: ref.watch(numberProvider),
                   items: items
                       .map((item) => DropdownMenuItem<int>(
                             alignment: AlignmentDirectional.center,
@@ -51,9 +53,11 @@ class _NumberMembersScreen extends ConsumerState<NumberMembersScreen> {
                             child: Text(item.toString()),
                           ))
                       .toList(),
-                  // onChanged: (item) => setState(() => selectedItem = item),
                   onChanged: (int? value) {
-                    ref.read(numberProvider.notifier).state = value;
+                    ref.read(numberProvider.notifier).state = value!;
+                    setState(() {
+                      _selectedItem = value;
+                    });
                   },
                 )),
             const SizedBox(height: 40),
