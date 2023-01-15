@@ -14,9 +14,8 @@ class _NumberMembersScreen extends ConsumerState<NumberMembersScreen> {
   List<int> items = [3, 4, 5];
   int? _selectedItem;
 
-  void moveStep(BuildContext ctx) {
-    Navigator.push(
-        ctx, MaterialPageRoute(builder: (ctx) => const WomanNameScreen()));
+  void _moveStep(BuildContext ctx) {
+    Navigator.push(ctx, MaterialPageRoute(builder: (ctx) => WomanNameScreen()));
   }
 
   @override
@@ -64,7 +63,7 @@ class _NumberMembersScreen extends ConsumerState<NumberMembersScreen> {
             SizedBox(
               width: _screenSize.width * 0.7,
               child: ElevatedButton(
-                onPressed: () => moveStep(context),
+                onPressed: () => _moveStep(context),
                 style: ElevatedButton.styleFrom(
                   minimumSize: const Size(double.infinity, 50),
                   shape: RoundedRectangleBorder(

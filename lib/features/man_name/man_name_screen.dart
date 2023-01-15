@@ -6,7 +6,7 @@ import 'package:lovemageddon/providers/providers.dart';
 class ManNameScreen extends ConsumerWidget {
   const ManNameScreen({super.key});
 
-  void moveStep(BuildContext ctx) {
+  void _moveStep(BuildContext ctx) {
     Navigator.push(
         ctx, MaterialPageRoute(builder: (ctx) => const ChoiceMenScreen()));
   }
@@ -53,7 +53,7 @@ class ManNameScreen extends ConsumerWidget {
                       _nameController[i].text
                   ];
                   ref.read(manNameProvider.notifier).state = nameList;
-                  moveStep(context);
+                  _moveStep(context);
                 },
                 style: ElevatedButton.styleFrom(
                   minimumSize: const Size(double.infinity, 50),
