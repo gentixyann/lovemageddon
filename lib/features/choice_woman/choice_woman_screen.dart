@@ -11,6 +11,10 @@ class ChoiceWomanScreen extends ConsumerStatefulWidget {
 class _ChoiceWomanScreenState extends ConsumerState<ChoiceWomanScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      body: Center(
+        child: Text('男が女を選ぶ'),
+      ),
+    );
   }
 }
