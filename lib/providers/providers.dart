@@ -19,3 +19,8 @@ final manNameProvider = StateProvider<List<String>>((ref) {
 final womanSelectedProvider = StateProvider<Map<String, String?>>((ref) {
   return {};
 });
+
+// 男性参加者の選んだ相手
+final manSelectedProvider = StateProvider<Map<String, String?>>((ref) {
+  return {};
+});
