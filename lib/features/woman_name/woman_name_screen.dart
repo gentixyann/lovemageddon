@@ -46,6 +46,7 @@ class WomanNameScreen extends ConsumerWidget {
                         return null;
                       },
                       controller: _nameController[index],
+                      maxLength: 7,
                       maxLines: 1,
                       textInputAction: TextInputAction.next,
                       decoration:

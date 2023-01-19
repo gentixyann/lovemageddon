@@ -37,6 +37,7 @@ class ManNameScreen extends ConsumerWidget {
                     String memberIndexText = memberIndex.toString();
                     return TextFormField(
                       controller: _nameController[index],
+                      maxLength: 7,
                       maxLines: 1,
                       textInputAction: TextInputAction.next,
                       decoration:
