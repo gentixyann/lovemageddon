@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:lovemageddon/features/result/widgets/beam_circles.dart';
 import 'package:lovemageddon/features/result/widgets/man_circles.dart';
 import 'package:lovemageddon/features/result/widgets/women_circles.dart';
 import 'package:lovemageddon/providers/providers.dart';
@@ -21,12 +22,14 @@ class _ResultScreenState extends ConsumerState<ResultScreen> {
 
     return Scaffold(
         body: Padding(
-      padding: EdgeInsets.all(2),
+      padding: EdgeInsets.symmetric(
+        vertical: _screenSize.height * 0.01,
+      ),
       child: Row(
-        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: const [
           WomanCircles(),
+          // BeamCircles(),
           ManCircles(),
         ],
       ),
