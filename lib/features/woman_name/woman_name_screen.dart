@@ -30,7 +30,7 @@ class WomanNameScreen extends ConsumerWidget {
           ),
           SizedBox(
             width: _screenSize.width * 0.8,
-            height: _screenSize.height * 0.4,
+            height: _screenSize.height * 0.5,
             child: Form(
               key: _formKey,
               child: ListView.builder(
@@ -48,7 +48,6 @@ class WomanNameScreen extends ConsumerWidget {
                       controller: _nameController[index],
                       maxLength: 7,
                       maxLines: 1,
-                      textInputAction: TextInputAction.next,
                       decoration:
                           InputDecoration(hintText: '$memberIndexText人目の名前'),
                     );

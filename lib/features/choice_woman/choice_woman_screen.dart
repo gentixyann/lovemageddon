@@ -44,6 +44,7 @@ class _ChoiceWomanScreenState extends ConsumerState<ChoiceWomanScreen> {
     final List<String> womanNameList = ref.watch(womanNameProvider);
     final List<String> manNameList = ref.watch(manNameProvider);
     final Map<String, String?> manSelectedList = ref.watch(manSelectedProvider);
+    final Map<int, int?> manSelectedIntList = ref.watch(manSelectedIntProvider);
 
     return Scaffold(
       body: Center(
@@ -80,10 +81,18 @@ class _ChoiceWomanScreenState extends ConsumerState<ChoiceWomanScreen> {
               child: ElevatedButton(
                 onPressed: () {
                   if (!isFinished) {
+                    final int womanIndex =
+                        womanNameList.indexOf(_selectedName!);
+                    final int manIndex =
+                        manNameList.indexOf(manNameList[_counter]);
+
+                    ref.watch(manSelectedIntProvider.notifier).state[manIndex] =
+                        womanIndex;
                     ref
                         .read(manSelectedProvider.notifier)
                         .state[manNameList[_counter]] = _selectedName;
                     print(manSelectedList);
+                    print(manSelectedIntList);
                     _incrementCounter(numberOfMember);
                   } else {
                     _moveStep(context);
