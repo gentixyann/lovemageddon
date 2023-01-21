@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lovemageddon/features/result/widgets/beam_circles.dart';
 import 'package:lovemageddon/features/result/widgets/man_circles.dart';
+import 'package:lovemageddon/features/result/widgets/man_circles2.dart';
 import 'package:lovemageddon/features/result/widgets/women_circles.dart';
+import 'package:lovemageddon/features/result/widgets/women_circles2.dart';
 import 'package:lovemageddon/providers/providers.dart';
-import 'dart:math';
 
 class ResultScreen2 extends ConsumerStatefulWidget {
   const ResultScreen2({super.key});
@@ -14,11 +15,8 @@ class ResultScreen2 extends ConsumerStatefulWidget {
 }
 
 class _ResultScreenState extends ConsumerState<ResultScreen2> {
-  final random = Random();
   List<double> horizontal_position = [-0.9];
   List<double> vertical_position = [-0.8, -0.5, -0.2, 0.1, 0.4];
-
-  double get randomValue => (random.nextDouble() * 2) - 1;
 
   @override
   Widget build(BuildContext context) {
@@ -32,42 +30,14 @@ class _ResultScreenState extends ConsumerState<ResultScreen2> {
         fit: StackFit.expand,
         children: [
           for (var i = 0; i < numberOfMember; i++)
-            Align(
-              alignment: Alignment(-0.9, vertical_position[i]),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    width: 50,
-                    height: 50,
-                    decoration: BoxDecoration(
-                      color: Colors.red,
-                      shape: BoxShape.circle,
-                    ),
-                  ),
-                  Text(womanNameList[i]),
-                ],
-              ),
+            WomanCircles2(
+              verticalPosition: vertical_position[i],
+              womanName: womanNameList[i],
             ),
           for (var i = 0; i < numberOfMember; i++)
-            Align(
-              alignment: Alignment(0.9, vertical_position[i]),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    width: 50,
-                    height: 50,
-                    decoration: BoxDecoration(
-                      color: Colors.blue,
-                      shape: BoxShape.circle,
-                    ),
-                  ),
-                  Text(manNameList[i]),
-                ],
-              ),
+            ManCircles2(
+              verticalPosition: vertical_position[i],
+              manName: manNameList[i],
             ),
           Align(
             alignment: Alignment(-0.5, -0.7),
