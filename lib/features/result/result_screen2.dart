@@ -49,6 +49,7 @@ class _ResultScreenState extends ConsumerState<ResultScreen2> {
   }
 
   void decidePosition(int numberOfMember) {
+    createPosition();
     final lastNum = numberOfMember - 1;
     if (_startCounter == lastNum || _isFirst) {
       _startCounter = 0;
@@ -64,7 +65,7 @@ class _ResultScreenState extends ConsumerState<ResultScreen2> {
   }
 
   void createCircles() {
-    Timer.periodic(const Duration(milliseconds: 1), (timer) {
+    Timer.periodic(const Duration(milliseconds: 700), (timer) {
       _timerCounter++;
       // print(_timerCounter);
       setState(() {
@@ -79,12 +80,11 @@ class _ResultScreenState extends ConsumerState<ResultScreen2> {
   }
 
   void reset() {
-    final Map<int, int?> manSelectedIntList = ref.watch(manSelectedIntProvider);
-    print(manSelectedIntList[0]);
     setState(() {
       isShowCircle.replaceRange(
           0, isShowCircle.length, [false, false, false, false, false]);
     });
+    _isFirst = true;
   }
 
   @override
@@ -111,8 +111,7 @@ class _ResultScreenState extends ConsumerState<ResultScreen2> {
           Visibility(
             visible: isShowCircle[0],
             child: Align(
-              alignment:
-                  Alignment(-0.6, connectVerticalPosition[_startCounter]),
+              alignment: Alignment(-0.6, createdVerticalPosition[0]),
               child: Container(
                 width: 30,
                 height: 30,
@@ -126,8 +125,7 @@ class _ResultScreenState extends ConsumerState<ResultScreen2> {
           Visibility(
             visible: isShowCircle[1],
             child: Align(
-              alignment:
-                  Alignment(-0.3, connectVerticalPosition[_startCounter]),
+              alignment: Alignment(-0.3, createdVerticalPosition[1]),
               child: Container(
                 width: 30,
                 height: 30,
@@ -141,7 +139,7 @@ class _ResultScreenState extends ConsumerState<ResultScreen2> {
           Visibility(
             visible: isShowCircle[2],
             child: Align(
-              alignment: Alignment(0.0, connectVerticalPosition[_startCounter]),
+              alignment: Alignment(0.0, createdVerticalPosition[2]),
               child: Container(
                 width: 30,
                 height: 30,
@@ -155,7 +153,7 @@ class _ResultScreenState extends ConsumerState<ResultScreen2> {
           Visibility(
             visible: isShowCircle[3],
             child: Align(
-              alignment: Alignment(0.3, connectVerticalPosition[_startCounter]),
+              alignment: Alignment(0.3, createdVerticalPosition[3]),
               child: Container(
                 width: 30,
                 height: 30,
@@ -169,7 +167,7 @@ class _ResultScreenState extends ConsumerState<ResultScreen2> {
           Visibility(
             visible: isShowCircle[4],
             child: Align(
-              alignment: Alignment(0.6, connectVerticalPosition[_startCounter]),
+              alignment: Alignment(0.6, createdVerticalPosition[4]),
               child: Container(
                 width: 30,
                 height: 30,
@@ -206,8 +204,8 @@ class _ResultScreenState extends ConsumerState<ResultScreen2> {
               width: _screenSize.width * 0.7,
               child: ElevatedButton(
                 onPressed: () {
-                  // reset();
-                  createPosition();
+                  reset();
+                  // createPosition();
                 },
                 style: ElevatedButton.styleFrom(
                   minimumSize: const Size(double.infinity, 50),
