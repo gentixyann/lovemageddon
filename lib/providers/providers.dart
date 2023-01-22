@@ -16,7 +16,8 @@ final manNameProvider = StateProvider<List<String>>((ref) {
 });
 
 // 女性参加者の選んだ相手
-final womanSelectedProvider = StateProvider<Map<String, String?>>((ref) {
+final womanSelectedProvider =
+    StateProvider.autoDispose<Map<String, String?>>((ref) {
   return {};
 });
 
@@ -25,7 +26,8 @@ final womanSelectedIntProvider = StateProvider<Map<int, int?>>((ref) {
 });
 
 // 男性参加者の選んだ相手
-final manSelectedProvider = StateProvider<Map<String, String?>>((ref) {
+final manSelectedProvider =
+    StateProvider.autoDispose<Map<String, String?>>((ref) {
   return {};
 });
 
