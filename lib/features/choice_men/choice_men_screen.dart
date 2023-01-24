@@ -15,6 +15,7 @@ class _ChoiceMenScreenState extends ConsumerState<ChoiceMenScreen> {
   int _counter = 0;
   String? _selectedName;
   bool isFinished = false;
+  final _formKey = GlobalKey<FormState>();
 
   void _incrementCounter(int numberOfMember) {
     final lastNum = numberOfMember - 1;
@@ -58,22 +59,31 @@ class _ChoiceMenScreenState extends ConsumerState<ChoiceMenScreen> {
                 ? const Text('お楽しみに')
                 : SizedBox(
                     width: _screenSize.width * 0.4,
-                    child: DropdownButton(
-                      hint: const Text('好きな人入れて'),
-                      isExpanded: true,
-                      value: _selectedName,
-                      items: manNameList
-                          .map((item) => DropdownMenuItem<String>(
-                                alignment: AlignmentDirectional.center,
-                                value: item,
-                                child: Text(item),
-                              ))
-                          .toList(),
-                      onChanged: (String? value) {
-                        setState(() {
-                          _selectedName = value;
-                        });
-                      },
+                    child: Form(
+                      key: _formKey,
+                      child: DropdownButtonFormField(
+                        validator: (value) {
+                          if (value == null) {
+                            return 'お相手を選んでね！';
+                          }
+                          return null;
+                        },
+                        hint: const Text('好きな人入れて'),
+                        isExpanded: true,
+                        value: _selectedName,
+                        items: manNameList
+                            .map((item) => DropdownMenuItem<String>(
+                                  alignment: AlignmentDirectional.center,
+                                  value: item,
+                                  child: Text(item),
+                                ))
+                            .toList(),
+                        onChanged: (String? value) {
+                          setState(() {
+                            _selectedName = value;
+                          });
+                        },
+                      ),
                     ),
                   ),
             SizedBox(
@@ -81,19 +91,21 @@ class _ChoiceMenScreenState extends ConsumerState<ChoiceMenScreen> {
               child: ElevatedButton(
                 onPressed: () {
                   if (!isFinished) {
-                    final int manIndex = manNameList.indexOf(_selectedName!);
-                    final int womanIndex =
-                        womanNameList.indexOf(womanNameList[_counter]);
-                    ref
-                        .watch(womanSelectedIntProvider.notifier)
-                        .state[womanIndex] = manIndex;
+                    if (_formKey.currentState!.validate()) {
+                      final int manIndex = manNameList.indexOf(_selectedName!);
+                      final int womanIndex =
+                          womanNameList.indexOf(womanNameList[_counter]);
+                      ref
+                          .watch(womanSelectedIntProvider.notifier)
+                          .state[womanIndex] = manIndex;
 
-                    ref
-                        .read(womanSelectedProvider.notifier)
-                        .state[womanNameList[_counter]] = _selectedName;
-                    print(womanSelectedList);
-                    print(womanSelectedIntList);
-                    _incrementCounter(numberOfMember);
+                      ref
+                          .read(womanSelectedProvider.notifier)
+                          .state[womanNameList[_counter]] = _selectedName;
+                      print(womanSelectedList);
+                      print(womanSelectedIntList);
+                      _incrementCounter(numberOfMember);
+                    }
                   } else {
                     _moveStep(context);
                   }
