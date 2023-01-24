@@ -31,10 +31,17 @@ class _ResultScreenState extends ConsumerState<ResultScreen2> {
 
   List<double> createdVerticalPosition = [0.0, 0.0, 0.0, 0.0, 0.0];
 
-  void createPosition() {
+  void createPosition(int numberOfMember) {
     final Map<int, int?> womanSelectedIntList =
         ref.watch(womanSelectedIntProvider);
     // print(womanSelectedIntList);
+    final lastNum = numberOfMember - 1;
+    if (_startCounter == lastNum || _isFirst) {
+      _startCounter = 0;
+    } else {
+      _startCounter++;
+    }
+    // _startCounter番目の女性が選んだ男性のindex番号を取る
     final targetInt = womanSelectedIntList[_startCounter];
 
     final startPos = connectVerticalPosition[_startCounter];
@@ -46,20 +53,13 @@ class _ResultScreenState extends ConsumerState<ResultScreen2> {
     createdVerticalPosition.replaceRange(0, createdVerticalPosition.length,
         [startPos, leftPos, centerPos, rightPos, endPos]);
     print(createdVerticalPosition);
+    _isFirst = false;
   }
 
   void decidePosition(int numberOfMember) {
-    createPosition();
-    final lastNum = numberOfMember - 1;
-    if (_startCounter == lastNum || _isFirst) {
-      _startCounter = 0;
-    } else {
-      _startCounter++;
-    }
-    _isFirst = false;
+    createPosition(numberOfMember);
 
     print('_startCounterです$_startCounter');
-    print('newMaxNumです$lastNum');
 
     reset();
   }
@@ -84,7 +84,7 @@ class _ResultScreenState extends ConsumerState<ResultScreen2> {
       isShowCircle.replaceRange(
           0, isShowCircle.length, [false, false, false, false, false]);
     });
-    _isFirst = true;
+    // _isFirst = true;
   }
 
   @override
