@@ -28,55 +28,53 @@ class _ResultScreenState extends ConsumerState<ResultScreen2> {
   int _startCounter = 0;
   List<bool> isShowCircle = [false, false, false, false, false];
   bool _isFirst = true;
+  bool _womenTurn = true;
 
   List<double> createdVerticalPosition = [0.0, 0.0, 0.0, 0.0, 0.0];
 
   void createPosition(int numberOfMember) {
     final Map<int, int?> womanSelectedIntList =
         ref.watch(womanSelectedIntProvider);
-    // print(womanSelectedIntList);
+    final Map<int, int?> manSelectedIntList = ref.watch(manSelectedIntProvider);
     final lastNum = numberOfMember - 1;
-    if (_startCounter == lastNum || _isFirst) {
-      _startCounter = 0;
+    print('_startCounterです$_startCounter');
+
+    if (_womenTurn) {
+      print('女性のターン');
+      // _startCounter番目の女性が選んだ男性のindex番号を取る
+      final targetInt = womanSelectedIntList[_startCounter];
+      final startPos = connectVerticalPosition[_startCounter];
+      final endPos = connectVerticalPosition[targetInt!];
+      final centerPos = (startPos + endPos) / 2;
+      final leftPos = (startPos + centerPos) / 2;
+      final rightPos = (centerPos + endPos) / 2;
+      createdVerticalPosition.replaceRange(0, createdVerticalPosition.length,
+          [startPos, leftPos, centerPos, rightPos, endPos]);
     } else {
-      _startCounter++;
+      print('男性のターン');
+      if (_isFirst) {
+        _startCounter = 0;
+        // 男性側からスタートするためにX軸のListの順番を逆にする
+        final reversedPosition = connectHorizontalPosition.reversed.toList();
+        connectHorizontalPosition.replaceRange(
+            0, connectHorizontalPosition.length, reversedPosition);
+        print(connectHorizontalPosition);
+      }
+      // _startCounter番目の男性が選んだ女性のindex番号を取る
+      final targetInt = manSelectedIntList[_startCounter];
+      final startPos = connectVerticalPosition[_startCounter];
+      final endPos = connectVerticalPosition[targetInt!];
+      final centerPos = (startPos + endPos) / 2;
+      final leftPos = (startPos + centerPos) / 2;
+      final rightPos = (centerPos + endPos) / 2;
+      createdVerticalPosition.replaceRange(0, createdVerticalPosition.length,
+          [startPos, leftPos, centerPos, rightPos, endPos]);
     }
-    // _startCounter番目の女性が選んだ男性のindex番号を取る
-    final targetInt = womanSelectedIntList[_startCounter];
-
-    final startPos = connectVerticalPosition[_startCounter];
-    final endPos = connectVerticalPosition[targetInt!];
-
-    final centerPos = (startPos + endPos) / 2;
-    final leftPos = (startPos + centerPos) / 2;
-    final rightPos = (centerPos + endPos) / 2;
-    createdVerticalPosition.replaceRange(0, createdVerticalPosition.length,
-        [startPos, leftPos, centerPos, rightPos, endPos]);
-    print(createdVerticalPosition);
-    _isFirst = false;
   }
 
   void decidePosition(int numberOfMember) {
     createPosition(numberOfMember);
-
-    print('_startCounterです$_startCounter');
-
     reset();
-  }
-
-  void createCircles() {
-    Timer.periodic(const Duration(milliseconds: 700), (timer) {
-      _timerCounter++;
-      // print(_timerCounter);
-      setState(() {
-        isShowCircle[_timerCounter] = true;
-      });
-      if (_timerCounter == 4) {
-        timer.cancel();
-        _timerCounter = -1;
-        // print('ストップです');
-      }
-    });
   }
 
   void reset() {
@@ -84,7 +82,28 @@ class _ResultScreenState extends ConsumerState<ResultScreen2> {
       isShowCircle.replaceRange(
           0, isShowCircle.length, [false, false, false, false, false]);
     });
-    // _isFirst = true;
+  }
+
+  void createCircles(int numberOfMember) {
+    Timer.periodic(const Duration(milliseconds: 700), (timer) {
+      _timerCounter++;
+      setState(() {
+        isShowCircle[_timerCounter] = true;
+      });
+      if (_timerCounter == 4) {
+        timer.cancel();
+        _timerCounter = -1;
+      }
+    });
+    final lastNum = numberOfMember - 1;
+    if (_startCounter != lastNum) {
+      _isFirst = false;
+      _startCounter++;
+    } else {
+      print('女性のターン終わり。次は男性');
+      _isFirst = true;
+      _womenTurn = false;
+    }
   }
 
   @override
@@ -111,7 +130,8 @@ class _ResultScreenState extends ConsumerState<ResultScreen2> {
           Visibility(
             visible: isShowCircle[0],
             child: Align(
-              alignment: Alignment(-0.6, createdVerticalPosition[0]),
+              alignment: Alignment(
+                  connectHorizontalPosition[0], createdVerticalPosition[0]),
               child: Container(
                 width: 30,
                 height: 30,
@@ -125,7 +145,8 @@ class _ResultScreenState extends ConsumerState<ResultScreen2> {
           Visibility(
             visible: isShowCircle[1],
             child: Align(
-              alignment: Alignment(-0.3, createdVerticalPosition[1]),
+              alignment: Alignment(
+                  connectHorizontalPosition[1], createdVerticalPosition[1]),
               child: Container(
                 width: 30,
                 height: 30,
@@ -139,7 +160,8 @@ class _ResultScreenState extends ConsumerState<ResultScreen2> {
           Visibility(
             visible: isShowCircle[2],
             child: Align(
-              alignment: Alignment(0.0, createdVerticalPosition[2]),
+              alignment: Alignment(
+                  connectHorizontalPosition[2], createdVerticalPosition[2]),
               child: Container(
                 width: 30,
                 height: 30,
@@ -153,7 +175,8 @@ class _ResultScreenState extends ConsumerState<ResultScreen2> {
           Visibility(
             visible: isShowCircle[3],
             child: Align(
-              alignment: Alignment(0.3, createdVerticalPosition[3]),
+              alignment: Alignment(
+                  connectHorizontalPosition[3], createdVerticalPosition[3]),
               child: Container(
                 width: 30,
                 height: 30,
@@ -167,7 +190,8 @@ class _ResultScreenState extends ConsumerState<ResultScreen2> {
           Visibility(
             visible: isShowCircle[4],
             child: Align(
-              alignment: Alignment(0.6, createdVerticalPosition[4]),
+              alignment: Alignment(
+                  connectHorizontalPosition[4], createdVerticalPosition[4]),
               child: Container(
                 width: 30,
                 height: 30,
@@ -185,8 +209,7 @@ class _ResultScreenState extends ConsumerState<ResultScreen2> {
               child: ElevatedButton(
                 onPressed: () {
                   decidePosition(numberOfMember);
-                  createCircles();
-                  // _startCounter++;
+                  createCircles(numberOfMember);
                 },
                 style: ElevatedButton.styleFrom(
                   minimumSize: const Size(double.infinity, 50),
