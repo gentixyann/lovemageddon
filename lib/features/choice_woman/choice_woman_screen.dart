@@ -15,6 +15,7 @@ class _ChoiceWomanScreenState extends ConsumerState<ChoiceWomanScreen> {
   int _counter = 0;
   String? _selectedName;
   bool isFinished = false;
+  final _formKey = GlobalKey<FormState>();
 
   void _incrementCounter(int numberOfMember) {
     final lastNum = numberOfMember - 1;
@@ -31,8 +32,6 @@ class _ChoiceWomanScreenState extends ConsumerState<ChoiceWomanScreen> {
   }
 
   void _moveStep(BuildContext ctx) {
-    // Navigator.pushReplacement(
-    //     ctx, MaterialPageRoute(builder: (ctx) => ResultScreen()));
     Navigator.pushReplacement(
         ctx, MaterialPageRoute(builder: (ctx) => ResultScreen2()));
   }
@@ -58,22 +57,25 @@ class _ChoiceWomanScreenState extends ConsumerState<ChoiceWomanScreen> {
                 ? const Text('お楽しみに')
                 : SizedBox(
                     width: _screenSize.width * 0.4,
-                    child: DropdownButton(
-                      hint: const Text('好きな人入れて'),
-                      isExpanded: true,
-                      value: _selectedName,
-                      items: womanNameList
-                          .map((item) => DropdownMenuItem<String>(
-                                alignment: AlignmentDirectional.center,
-                                value: item,
-                                child: Text(item),
-                              ))
-                          .toList(),
-                      onChanged: (String? value) {
-                        setState(() {
-                          _selectedName = value;
-                        });
-                      },
+                    child: Form(
+                      key: _formKey,
+                      child: DropdownButtonFormField(
+                        hint: const Text('好きな人入れて'),
+                        isExpanded: true,
+                        value: _selectedName,
+                        items: womanNameList
+                            .map((item) => DropdownMenuItem<String>(
+                                  alignment: AlignmentDirectional.center,
+                                  value: item,
+                                  child: Text(item),
+                                ))
+                            .toList(),
+                        onChanged: (String? value) {
+                          setState(() {
+                            _selectedName = value;
+                          });
+                        },
+                      ),
                     ),
                   ),
             SizedBox(
@@ -81,19 +83,22 @@ class _ChoiceWomanScreenState extends ConsumerState<ChoiceWomanScreen> {
               child: ElevatedButton(
                 onPressed: () {
                   if (!isFinished) {
-                    final int womanIndex =
-                        womanNameList.indexOf(_selectedName!);
-                    final int manIndex =
-                        manNameList.indexOf(manNameList[_counter]);
+                    if (_formKey.currentState!.validate()) {
+                      final int womanIndex =
+                          womanNameList.indexOf(_selectedName!);
+                      final int manIndex =
+                          manNameList.indexOf(manNameList[_counter]);
 
-                    ref.watch(manSelectedIntProvider.notifier).state[manIndex] =
-                        womanIndex;
-                    ref
-                        .read(manSelectedProvider.notifier)
-                        .state[manNameList[_counter]] = _selectedName;
-                    print(manSelectedList);
-                    print(manSelectedIntList);
-                    _incrementCounter(numberOfMember);
+                      ref
+                          .watch(manSelectedIntProvider.notifier)
+                          .state[manIndex] = womanIndex;
+                      ref
+                          .read(manSelectedProvider.notifier)
+                          .state[manNameList[_counter]] = _selectedName;
+                      print(manSelectedList);
+                      print(manSelectedIntList);
+                      _incrementCounter(numberOfMember);
+                    }
                   } else {
                     _moveStep(context);
                   }

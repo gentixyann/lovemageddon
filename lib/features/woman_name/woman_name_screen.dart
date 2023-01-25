@@ -8,8 +8,7 @@ class WomanNameScreen extends ConsumerWidget {
   final _formKey = GlobalKey<FormState>();
 
   void _moveStep(BuildContext ctx) {
-    Navigator.push(
-        ctx, MaterialPageRoute(builder: (ctx) => const ManNameScreen()));
+    Navigator.push(ctx, MaterialPageRoute(builder: (ctx) => ManNameScreen()));
   }
 
   @override

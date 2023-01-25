@@ -4,7 +4,8 @@ import 'package:lovemageddon/features/choice_men/choice_men_screen.dart';
 import 'package:lovemageddon/providers/providers.dart';
 
 class ManNameScreen extends ConsumerWidget {
-  const ManNameScreen({super.key});
+  ManNameScreen({super.key});
+  final _formKey = GlobalKey<FormState>();
 
   void _moveStep(BuildContext ctx) {
     Navigator.push(
@@ -30,30 +31,41 @@ class ManNameScreen extends ConsumerWidget {
             SizedBox(
               width: _screenSize.width * 0.8,
               height: _screenSize.height * 0.5,
-              child: ListView.builder(
-                  itemCount: numberOfMember,
-                  itemBuilder: (BuildContext context, int index) {
-                    int memberIndex = index + 1;
-                    String memberIndexText = memberIndex.toString();
-                    return TextFormField(
-                      controller: _nameController[index],
-                      maxLength: 7,
-                      maxLines: 1,
-                      decoration:
-                          InputDecoration(hintText: '$memberIndexText人目の名前'),
-                    );
-                  }),
+              child: Form(
+                key: _formKey,
+                child: ListView.builder(
+                    itemCount: numberOfMember,
+                    itemBuilder: (BuildContext context, int index) {
+                      int memberIndex = index + 1;
+                      String memberIndexText = memberIndex.toString();
+                      return TextFormField(
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return '名前入れてね！';
+                          }
+                          return null;
+                        },
+                        controller: _nameController[index],
+                        maxLength: 7,
+                        maxLines: 1,
+                        decoration:
+                            InputDecoration(hintText: '$memberIndexText人目の名前'),
+                      );
+                    }),
+              ),
             ),
             SizedBox(
               width: _screenSize.width * 0.7,
               child: ElevatedButton(
                 onPressed: () {
-                  final nameList = [
-                    for (int i = 0; i < numberOfMember; i++)
-                      _nameController[i].text
-                  ];
-                  ref.read(manNameProvider.notifier).state = nameList;
-                  _moveStep(context);
+                  if (_formKey.currentState!.validate()) {
+                    final nameList = [
+                      for (int i = 0; i < numberOfMember; i++)
+                        _nameController[i].text
+                    ];
+                    ref.read(manNameProvider.notifier).state = nameList;
+                    _moveStep(context);
+                  }
                 },
                 style: ElevatedButton.styleFrom(
                   minimumSize: const Size(double.infinity, 50),
