@@ -29,6 +29,7 @@ class _ResultScreenState extends ConsumerState<ResultScreen2> {
   List<bool> isShowCircle = [false, false, false, false, false];
   bool _isFirst = true;
   bool _womenTurn = true;
+  bool _isSuccess = false;
 
   List<double> createdVerticalPosition = [0.0, 0.0, 0.0, 0.0, 0.0];
 
@@ -40,7 +41,6 @@ class _ResultScreenState extends ConsumerState<ResultScreen2> {
     print('_startCounterです$_startCounter');
 
     if (_womenTurn) {
-      print('女性のターン');
       // _startCounter番目の女性が選んだ男性のindex番号を取る
       final targetInt = womanSelectedIntList[_startCounter];
       final startPos = connectVerticalPosition[_startCounter];
@@ -50,8 +50,13 @@ class _ResultScreenState extends ConsumerState<ResultScreen2> {
       final rightPos = (centerPos + endPos) / 2;
       createdVerticalPosition.replaceRange(0, createdVerticalPosition.length,
           [startPos, leftPos, centerPos, rightPos, endPos]);
+
+      final targetSelectedInt = manSelectedIntList[targetInt];
+      // print('$targetIntが選んだ相手は$targetSelectedIntです');
+      if (targetSelectedInt == _startCounter) {
+        print('マッチ成立ですね');
+      }
     } else {
-      print('男性のターン');
       if (_isFirst) {
         _startCounter = 0;
         // 男性側からスタートするためにX軸のListの順番を逆にする
@@ -228,7 +233,6 @@ class _ResultScreenState extends ConsumerState<ResultScreen2> {
               child: ElevatedButton(
                 onPressed: () {
                   reset();
-                  // createPosition();
                 },
                 style: ElevatedButton.styleFrom(
                   minimumSize: const Size(double.infinity, 50),
