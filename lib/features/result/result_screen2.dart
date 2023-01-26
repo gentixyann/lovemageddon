@@ -29,7 +29,8 @@ class _ResultScreenState extends ConsumerState<ResultScreen2> {
   List<bool> isShowCircle = [false, false, false, false, false];
   bool _isFirst = true;
   bool _womenTurn = true;
-  bool _isSuccess = false;
+  bool? _isSuccess;
+  bool _isFinished = false;
 
   List<double> createdVerticalPosition = [0.0, 0.0, 0.0, 0.0, 0.0];
 
@@ -50,12 +51,8 @@ class _ResultScreenState extends ConsumerState<ResultScreen2> {
       final rightPos = (centerPos + endPos) / 2;
       createdVerticalPosition.replaceRange(0, createdVerticalPosition.length,
           [startPos, leftPos, centerPos, rightPos, endPos]);
-
-      final targetSelectedInt = manSelectedIntList[targetInt];
-      // print('$targetIntが選んだ相手は$targetSelectedIntです');
-      if (targetSelectedInt == _startCounter) {
-        print('マッチ成立ですね');
-      }
+      // マッチ成功かを判定
+      _isSuccess = checkSuccess(targetInt, manSelectedIntList);
     } else {
       if (_isFirst) {
         _startCounter = 0;
@@ -74,6 +71,17 @@ class _ResultScreenState extends ConsumerState<ResultScreen2> {
       final rightPos = (centerPos + endPos) / 2;
       createdVerticalPosition.replaceRange(0, createdVerticalPosition.length,
           [startPos, leftPos, centerPos, rightPos, endPos]);
+      // マッチ成功かを判定
+      _isSuccess = checkSuccess(targetInt, womanSelectedIntList);
+    }
+  }
+
+  checkSuccess(int targetInt, Map<int, int?> manSelectedIntList) {
+    final targetSelectedInt = manSelectedIntList[targetInt];
+    if (targetSelectedInt == _startCounter) {
+      return true;
+    } else {
+      return false;
     }
   }
 
