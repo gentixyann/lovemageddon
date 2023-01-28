@@ -64,12 +64,6 @@ class _NumberMembersScreen extends ConsumerState<NumberMembersScreen> {
               width: _screenSize.width * 0.7,
               child: ElevatedButton(
                 onPressed: () => _moveStep(context),
-                style: ElevatedButton.styleFrom(
-                  minimumSize: const Size(double.infinity, 50),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                ),
                 child: const Text('次へ'),
               ),
             ),

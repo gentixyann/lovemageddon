@@ -8,12 +8,6 @@ void main() {
   ));
 }
 
-// プロバイダー
-final nicknameProvider = StateProvider<String>((ref) {
-  // 変化するデータ
-  return "ルビー";
-});
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -23,58 +17,17 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-        primaryColor: Colors.amber[300],
-      ),
+          // primarySwatch: Colors.blue,
+          primaryColor: Colors.amber[300],
+          elevatedButtonTheme: ElevatedButtonThemeData(
+              style: ElevatedButton.styleFrom(
+            backgroundColor: const Color.fromRGBO(239, 128, 125, 1),
+            minimumSize: const Size(double.infinity, 50),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+          ))),
       home: const NumberMembersScreen(),
-    );
-  }
-}
-
-class MyHomePage extends ConsumerWidget {
-  const MyHomePage({super.key});
-
-  // ノティファイア でデータを変更する
-  tapA(WidgetRef ref) {
-    final notifier = ref.read(nicknameProvider.notifier);
-    notifier.state = 'ルビーネコちゃん';
-  }
-
-  tapB(WidgetRef ref) {
-    final notifier = ref.read(nicknameProvider.notifier);
-    notifier.state = 'ルビーバード';
-  }
-
-  tapC(WidgetRef ref) {
-    final notifier = ref.read(nicknameProvider.notifier);
-    notifier.state = 'ルビーフィッシュ';
-  }
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    // データを見張っておく
-    final nickname = ref.watch(nicknameProvider);
-    return Scaffold(
-      appBar: AppBar(title: Text(nickname)),
-      body: SizedBox(
-        width: double.infinity,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            // ニックネーム 2
-            Text(nickname),
-            // ボタン A
-            ElevatedButton(onPressed: () => tapA(ref), child: const Text('A')),
-            // ボタン B
-            ElevatedButton(onPressed: () => tapB(ref), child: const Text('B')),
-            // ボタン C
-            ElevatedButton(onPressed: () => tapC(ref), child: const Text('C')),
-            // ニックネーム 3
-            Text(nickname),
-          ],
-        ),
-      ),
     );
   }
 }
