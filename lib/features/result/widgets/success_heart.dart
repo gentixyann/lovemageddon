@@ -7,8 +7,8 @@ class SuccessHeart extends StatelessWidget {
   Widget build(BuildContext context) {
     var _screenSize = MediaQuery.of(context).size;
     return Container(
-      width: 100,
-      height: 100,
+      width: _screenSize.width * 0.4,
+      height: _screenSize.height * 0.2,
       child: Image.asset(
         'assets/images/success.png',
         fit: BoxFit.cover,

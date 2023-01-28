@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lovemageddon/features/result/widgets/man_circles2.dart';
 import 'package:lovemageddon/features/result/widgets/success_heart.dart';
+import 'package:lovemageddon/features/result/widgets/unsuccess_heart.dart';
 import 'package:lovemageddon/features/result/widgets/women_circles2.dart';
 import 'package:lovemageddon/providers/providers.dart';
 import 'dart:async';
@@ -27,7 +28,8 @@ class _ResultScreenState extends ConsumerState<ResultScreen2> {
   List<bool> isShowCircle = [false, false, false, false, false];
   bool _isFirst = true;
   bool _womenTurn = true;
-  bool? _isSuccess;
+  bool _isSuccess = false;
+  bool _isUnsuccess = false;
   bool _isFinished = false;
 
   List<double> createdVerticalPosition = [0.0, 0.0, 0.0, 0.0, 0.0];
@@ -50,7 +52,7 @@ class _ResultScreenState extends ConsumerState<ResultScreen2> {
       createdVerticalPosition.replaceRange(0, createdVerticalPosition.length,
           [startPos, leftPos, centerPos, rightPos, endPos]);
       // マッチ成功かを判定
-      _isSuccess = checkSuccess(targetInt, manSelectedIntList);
+      checkSuccess(targetInt, manSelectedIntList);
     } else {
       if (_isFirst) {
         _startCounter = 0;
@@ -70,20 +72,33 @@ class _ResultScreenState extends ConsumerState<ResultScreen2> {
       createdVerticalPosition.replaceRange(0, createdVerticalPosition.length,
           [startPos, leftPos, centerPos, rightPos, endPos]);
       // マッチ成功かを判定
-      _isSuccess = checkSuccess(targetInt, womanSelectedIntList);
+      checkSuccess(targetInt, womanSelectedIntList);
     }
   }
 
-  checkSuccess(int targetInt, Map<int, int?> manSelectedIntList) {
+  void checkSuccess(int targetInt, Map<int, int?> manSelectedIntList) {
     final targetSelectedInt = manSelectedIntList[targetInt];
-    if (targetSelectedInt == _startCounter) {
-      return true;
-    } else {
-      return false;
-    }
+    Future.delayed(const Duration(seconds: 5), () {
+      print('delayedの時点で$_startCounter');
+      if (targetSelectedInt == _startCounter) {
+        setState(() {
+          _isSuccess = true;
+        });
+      } else {
+        setState(() {
+          _isUnsuccess = true;
+        });
+      }
+      // 結果の表示が終わったら_startCounterをincrement
+      _startCounter++;
+    });
   }
 
   void decidePosition(int numberOfMember) {
+    setState(() {
+      _isSuccess = false;
+      _isUnsuccess = false;
+    });
     createPosition(numberOfMember);
     reset();
   }
@@ -96,6 +111,7 @@ class _ResultScreenState extends ConsumerState<ResultScreen2> {
   }
 
   void createCircles(int numberOfMember) {
+    // 0.7秒ごとに処理を実行
     Timer.periodic(const Duration(milliseconds: 700), (timer) {
       _timerCounter++;
       setState(() {
@@ -109,7 +125,6 @@ class _ResultScreenState extends ConsumerState<ResultScreen2> {
     final lastNum = numberOfMember - 1;
     if (_startCounter != lastNum) {
       _isFirst = false;
-      _startCounter++;
     } else {
       print('女性のターン終わり。次は男性');
       _isFirst = true;
@@ -123,6 +138,7 @@ class _ResultScreenState extends ConsumerState<ResultScreen2> {
     final int numberOfMember = ref.watch(numberProvider);
     final List<String> womanNameList = ref.watch(womanNameProvider);
     final List<String> manNameList = ref.watch(manNameProvider);
+    final lastNum = numberOfMember - 1;
 
     return Scaffold(
       body: Stack(
@@ -232,27 +248,19 @@ class _ResultScreenState extends ConsumerState<ResultScreen2> {
               ),
             ),
           ),
-          Align(
-            alignment: Alignment(0.1, 0.9),
-            child: SizedBox(
-              width: _screenSize.width * 0.7,
-              child: ElevatedButton(
-                onPressed: () {
-                  reset();
-                },
-                style: ElevatedButton.styleFrom(
-                  minimumSize: const Size(double.infinity, 50),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                ),
-                child: const Text('リセット'),
-              ),
+          Visibility(
+            visible: _isSuccess,
+            child: Align(
+              alignment: Alignment(0.0, 0.0),
+              child: SuccessHeart(),
             ),
           ),
-          Align(
-            alignment: Alignment(0.0, 0.0),
-            child: SuccessHeart(),
+          Visibility(
+            visible: _isUnsuccess,
+            child: Align(
+              alignment: Alignment(0.0, 0.0),
+              child: UnsuccessHeart(),
+            ),
           )
         ],
       ),
