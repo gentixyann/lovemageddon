@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:lovemageddon/features/result/result_screen.dart';
 import 'package:lovemageddon/features/result/result_screen2.dart';
 import 'package:lovemageddon/providers/providers.dart';
 

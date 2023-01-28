@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:lovemageddon/features/result/widgets/beam_circles.dart';
-import 'package:lovemageddon/features/result/widgets/man_circles.dart';
 import 'package:lovemageddon/features/result/widgets/man_circles2.dart';
-import 'package:lovemageddon/features/result/widgets/women_circles.dart';
+import 'package:lovemageddon/features/result/widgets/success_heart.dart';
 import 'package:lovemageddon/features/result/widgets/women_circles2.dart';
 import 'package:lovemageddon/providers/providers.dart';
 import 'dart:async';
@@ -251,6 +249,10 @@ class _ResultScreenState extends ConsumerState<ResultScreen2> {
                 child: const Text('リセット'),
               ),
             ),
+          ),
+          Align(
+            alignment: Alignment(0.0, 0.0),
+            child: SuccessHeart(),
           )
         ],
       ),

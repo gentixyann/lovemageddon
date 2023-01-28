@@ -1,5 +1,5 @@
 flutter: {q: s, a: x, z: w}
 flutter: {0: 1, 1: 2, 2: 0}
 
-flutter: {w: z, s: a, x: q}
-flutter: {0: 2, 1: 1, 2: 0}
+flutter: {w: q, s: q, x: q}
+flutter: {0: 0, 1: 0, 2: 0}
