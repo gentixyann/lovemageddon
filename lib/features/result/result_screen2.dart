@@ -39,9 +39,9 @@ class _ResultScreenState extends ConsumerState<ResultScreen2> {
         ref.watch(womanSelectedIntProvider);
     final Map<int, int?> manSelectedIntList = ref.watch(manSelectedIntProvider);
     final lastNum = numberOfMember - 1;
-    print('_startCounterです$_startCounter');
 
     if (_womenTurn) {
+      print('_startCounterです$_startCounter');
       // _startCounter番目の女性が選んだ男性のindex番号を取る
       final targetInt = womanSelectedIntList[_startCounter];
       final startPos = connectVerticalPosition[_startCounter];
@@ -52,15 +52,15 @@ class _ResultScreenState extends ConsumerState<ResultScreen2> {
       createdVerticalPosition.replaceRange(0, createdVerticalPosition.length,
           [startPos, leftPos, centerPos, rightPos, endPos]);
       // マッチ成功かを判定
-      checkSuccess(targetInt, manSelectedIntList);
+      checkSuccess(targetInt, manSelectedIntList, numberOfMember);
     } else {
       if (_isFirst) {
         _startCounter = 0;
+        print('_startCounterです$_startCounter');
         // 男性側からスタートするためにX軸のListの順番を逆にする
         final reversedPosition = connectHorizontalPosition.reversed.toList();
         connectHorizontalPosition.replaceRange(
             0, connectHorizontalPosition.length, reversedPosition);
-        print(connectHorizontalPosition);
       }
       // _startCounter番目の男性が選んだ女性のindex番号を取る
       final targetInt = manSelectedIntList[_startCounter];
@@ -72,14 +72,17 @@ class _ResultScreenState extends ConsumerState<ResultScreen2> {
       createdVerticalPosition.replaceRange(0, createdVerticalPosition.length,
           [startPos, leftPos, centerPos, rightPos, endPos]);
       // マッチ成功かを判定
-      checkSuccess(targetInt, womanSelectedIntList);
+      checkSuccess(targetInt, womanSelectedIntList, numberOfMember);
+      if (_startCounter == lastNum) {
+        _isFinished = true;
+      }
     }
   }
 
-  void checkSuccess(int targetInt, Map<int, int?> manSelectedIntList) {
+  void checkSuccess(
+      int targetInt, Map<int, int?> manSelectedIntList, int numberOfMember) {
     final targetSelectedInt = manSelectedIntList[targetInt];
     Future.delayed(const Duration(seconds: 5), () {
-      print('delayedの時点で$_startCounter');
       if (targetSelectedInt == _startCounter) {
         setState(() {
           _isSuccess = true;
@@ -233,31 +236,36 @@ class _ResultScreenState extends ConsumerState<ResultScreen2> {
             alignment: Alignment(0.1, 0.6),
             child: SizedBox(
               width: _screenSize.width * 0.7,
-              child: ElevatedButton(
-                onPressed: () {
-                  decidePosition(numberOfMember);
-                  createCircles(numberOfMember);
-                },
-                style: ElevatedButton.styleFrom(
-                  minimumSize: const Size(double.infinity, 50),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                ),
-                child: const Text('ラブマゲドン！'),
-              ),
+              child: _isFinished
+                  ? ElevatedButton(
+                      child: const Text('次へ'),
+                      onPressed: () {},
+                    )
+                  : ElevatedButton(
+                      onPressed: () {
+                        decidePosition(numberOfMember);
+                        createCircles(numberOfMember);
+                      },
+                      style: ElevatedButton.styleFrom(
+                        minimumSize: const Size(double.infinity, 50),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                      ),
+                      child: const Text('ラブマゲドン！'),
+                    ),
             ),
           ),
           Visibility(
             visible: _isSuccess,
-            child: Align(
+            child: const Align(
               alignment: Alignment(0.0, 0.0),
               child: SuccessHeart(),
             ),
           ),
           Visibility(
             visible: _isUnsuccess,
-            child: Align(
+            child: const Align(
               alignment: Alignment(0.0, 0.0),
               child: UnsuccessHeart(),
             ),
