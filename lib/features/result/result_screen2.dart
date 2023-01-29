@@ -96,6 +96,9 @@ class _ResultScreenState extends ConsumerState<ResultScreen2> {
       }
       // 結果の表示が終わったら_startCounterをincrement
       _startCounter++;
+      setState(() {
+        _inProgress = false;
+      });
     });
   }
 
@@ -103,9 +106,11 @@ class _ResultScreenState extends ConsumerState<ResultScreen2> {
     setState(() {
       _isSuccess = false;
       _isUnsuccess = false;
+      _inProgress = true;
     });
     createPosition(numberOfMember);
     reset();
+    createCircles(numberOfMember);
   }
 
   void reset() {
@@ -172,7 +177,7 @@ class _ResultScreenState extends ConsumerState<ResultScreen2> {
               child: Container(
                 width: 30,
                 height: 30,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Color.fromARGB(255, 125, 125, 125),
                   shape: BoxShape.circle,
                 ),
@@ -187,7 +192,7 @@ class _ResultScreenState extends ConsumerState<ResultScreen2> {
               child: Container(
                 width: 30,
                 height: 30,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Color.fromARGB(255, 125, 125, 125),
                   shape: BoxShape.circle,
                 ),
@@ -202,7 +207,7 @@ class _ResultScreenState extends ConsumerState<ResultScreen2> {
               child: Container(
                 width: 30,
                 height: 30,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Color.fromARGB(255, 125, 125, 125),
                   shape: BoxShape.circle,
                 ),
@@ -217,7 +222,7 @@ class _ResultScreenState extends ConsumerState<ResultScreen2> {
               child: Container(
                 width: 30,
                 height: 30,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Color.fromARGB(255, 125, 125, 125),
                   shape: BoxShape.circle,
                 ),
@@ -232,7 +237,7 @@ class _ResultScreenState extends ConsumerState<ResultScreen2> {
               child: Container(
                 width: 30,
                 height: 30,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Color.fromARGB(255, 125, 125, 125),
                   shape: BoxShape.circle,
                 ),
@@ -245,15 +250,14 @@ class _ResultScreenState extends ConsumerState<ResultScreen2> {
               width: _screenSize.width * 0.7,
               child: _isFinished
                   ? ElevatedButton(
+                      onPressed: _inProgress ? null : () => _moveStep(context),
                       child: const Text('次へ'),
-                      onPressed: () => _moveStep(context),
                     )
                   : ElevatedButton(
-                      onPressed: () {
-                        decidePosition(numberOfMember);
-                        createCircles(numberOfMember);
-                      },
-                      child: const Text('ラブマゲドン！'),
+                      onPressed: _inProgress
+                          ? null
+                          : () => decidePosition(numberOfMember),
+                      child: const Text('モテマゲドン！'),
                     ),
             ),
           ),
