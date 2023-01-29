@@ -19,7 +19,9 @@ class FinalScreen extends ConsumerWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Text('お疲れ様でした！'),
+            const Text(
+              'お疲れ様でした！',
+            ),
             const Text('カップル成立した？'),
             const Text('成立した方々はぜひラブマゲドンして来てね！'),
             const SizedBox(

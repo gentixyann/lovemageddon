@@ -21,14 +21,22 @@ class MyApp extends StatelessWidget {
         // primarySwatch: Colors.blue,
         primaryColor: Colors.amber[300],
         elevatedButtonTheme: ElevatedButtonThemeData(
-            style: ElevatedButton.styleFrom(
-          backgroundColor: const Color.fromRGBO(239, 128, 125, 1),
-          minimumSize: const Size(double.infinity, 50),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
+          style: ElevatedButton.styleFrom(
+            backgroundColor: const Color.fromRGBO(239, 128, 125, 1),
+            minimumSize: const Size(double.infinity, 50),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
           ),
-        )),
-        textTheme: GoogleFonts.kosugiMaruTextTheme(),
+        ),
+        textTheme: GoogleFonts.kosugiMaruTextTheme(
+          const TextTheme(
+            bodyText2: TextStyle(
+              fontSize: 15,
+              height: 1.5,
+            ),
+          ),
+        ),
       ),
       home: const NumberMembersScreen(),
     );
