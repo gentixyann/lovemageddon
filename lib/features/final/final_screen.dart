@@ -4,7 +4,7 @@ import 'package:lovemageddon/features/number_members/number_members_screen.dart'
 class FinalScreen extends StatelessWidget {
   const FinalScreen({super.key});
 
-  void moveStep(BuildContext ctx) {
+  void _moveStep(BuildContext ctx) {
     Navigator.push(
         ctx, MaterialPageRoute(builder: (ctx) => const NumberMembersScreen()));
   }
@@ -24,13 +24,7 @@ class FinalScreen extends StatelessWidget {
             SizedBox(
               width: _screenSize.width * 0.7,
               child: ElevatedButton(
-                onPressed: () => moveStep(context),
-                style: ElevatedButton.styleFrom(
-                  minimumSize: const Size(double.infinity, 50),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                ),
+                onPressed: () => _moveStep(context),
                 child: const Text('もう一度'),
               ),
             ),

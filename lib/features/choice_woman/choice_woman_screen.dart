@@ -59,6 +59,12 @@ class _ChoiceWomanScreenState extends ConsumerState<ChoiceWomanScreen> {
                     child: Form(
                       key: _formKey,
                       child: DropdownButtonFormField(
+                        validator: (value) {
+                          if (value == null) {
+                            return 'お相手を選んでね！';
+                          }
+                          return null;
+                        },
                         hint: const Text('好きな人入れて'),
                         isExpanded: true,
                         value: _selectedName,
@@ -102,12 +108,6 @@ class _ChoiceWomanScreenState extends ConsumerState<ChoiceWomanScreen> {
                     _moveStep(context);
                   }
                 },
-                style: ElevatedButton.styleFrom(
-                  minimumSize: const Size(double.infinity, 50),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                ),
                 child: const Text('次へ'),
               ),
             ),

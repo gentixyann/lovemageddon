@@ -66,12 +66,6 @@ class WomanNameScreen extends ConsumerWidget {
                   _moveStep(context);
                 }
               },
-              style: ElevatedButton.styleFrom(
-                minimumSize: const Size(double.infinity, 50),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-              ),
               child: const Text('次へ'),
             ),
           ),

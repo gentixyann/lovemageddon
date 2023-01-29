@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:lovemageddon/features/final/final_screen.dart';
 import 'package:lovemageddon/features/result/widgets/man_circles2.dart';
 import 'package:lovemageddon/features/result/widgets/success_heart.dart';
 import 'package:lovemageddon/features/result/widgets/unsuccess_heart.dart';
@@ -31,6 +32,7 @@ class _ResultScreenState extends ConsumerState<ResultScreen2> {
   bool _isSuccess = false;
   bool _isUnsuccess = false;
   bool _isFinished = false;
+  bool _inProgress = false;
 
   List<double> createdVerticalPosition = [0.0, 0.0, 0.0, 0.0, 0.0];
 
@@ -135,6 +137,11 @@ class _ResultScreenState extends ConsumerState<ResultScreen2> {
     }
   }
 
+  void _moveStep(BuildContext ctx) {
+    Navigator.pushReplacement(
+        ctx, MaterialPageRoute(builder: (ctx) => const FinalScreen()));
+  }
+
   @override
   Widget build(BuildContext context) {
     var _screenSize = MediaQuery.of(context).size;
@@ -233,25 +240,19 @@ class _ResultScreenState extends ConsumerState<ResultScreen2> {
             ),
           ),
           Align(
-            alignment: Alignment(0.1, 0.6),
+            alignment: const Alignment(0.1, 0.6),
             child: SizedBox(
               width: _screenSize.width * 0.7,
               child: _isFinished
                   ? ElevatedButton(
                       child: const Text('次へ'),
-                      onPressed: () {},
+                      onPressed: () => _moveStep(context),
                     )
                   : ElevatedButton(
                       onPressed: () {
                         decidePosition(numberOfMember);
                         createCircles(numberOfMember);
                       },
-                      style: ElevatedButton.styleFrom(
-                        minimumSize: const Size(double.infinity, 50),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                      ),
                       child: const Text('ラブマゲドン！'),
                     ),
             ),
