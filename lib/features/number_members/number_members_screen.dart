@@ -34,9 +34,6 @@ class _NumberMembersScreen extends ConsumerState<NumberMembersScreen> {
             const Text(
               '2人1組でラブマゲドンしたい人数を入力してな',
             ),
-            Text(
-              numberOfMember.toString(),
-            ),
             const SizedBox(height: 15),
             SizedBox(
                 width: _screenSize.width * 0.4,

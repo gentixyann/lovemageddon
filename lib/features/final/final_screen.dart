@@ -22,6 +22,9 @@ class FinalScreen extends ConsumerWidget {
             const Text('お疲れ様でした！'),
             const Text('カップル成立した？'),
             const Text('成立した方々はぜひラブマゲドンして来てね！'),
+            const SizedBox(
+              height: 30,
+            ),
             SizedBox(
               width: _screenSize.width * 0.7,
               child: ElevatedButton(
