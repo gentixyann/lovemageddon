@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lovemageddon/features/number_members/number_members_screen.dart';
 
-class FinalScreen extends StatelessWidget {
+class FinalScreen extends ConsumerWidget {
   const FinalScreen({super.key});
 
   void _moveStep(BuildContext ctx) {
@@ -10,7 +11,7 @@ class FinalScreen extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     var _screenSize = MediaQuery.of(context).size;
 
     return Scaffold(

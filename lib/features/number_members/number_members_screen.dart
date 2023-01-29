@@ -44,7 +44,6 @@ class _NumberMembersScreen extends ConsumerState<NumberMembersScreen> {
                   hint: const Text('人数を選んで'),
                   isExpanded: true,
                   value: _selectedItem,
-                  // value: ref.watch(numberProvider),
                   items: items
                       .map((item) => DropdownMenuItem<int>(
                             alignment: AlignmentDirectional.center,

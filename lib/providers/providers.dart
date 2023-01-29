@@ -21,7 +21,9 @@ final womanSelectedProvider =
   return {};
 });
 
-final womanSelectedIntProvider = StateProvider<Map<int, int?>>((ref) {
+final womanSelectedIntProvider =
+    StateProvider.autoDispose<Map<int, int?>>((ref) {
+  ref.keepAlive();
   return {};
 });
 
@@ -31,6 +33,7 @@ final manSelectedProvider =
   return {};
 });
 
-final manSelectedIntProvider = StateProvider<Map<int, int?>>((ref) {
+final manSelectedIntProvider = StateProvider.autoDispose<Map<int, int?>>((ref) {
+  ref.keepAlive();
   return {};
 });

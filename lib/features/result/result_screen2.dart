@@ -173,7 +173,7 @@ class _ResultScreenState extends ConsumerState<ResultScreen2> {
                 width: 30,
                 height: 30,
                 decoration: BoxDecoration(
-                  color: Colors.black,
+                  color: Color.fromARGB(255, 125, 125, 125),
                   shape: BoxShape.circle,
                 ),
               ),
@@ -188,7 +188,7 @@ class _ResultScreenState extends ConsumerState<ResultScreen2> {
                 width: 30,
                 height: 30,
                 decoration: BoxDecoration(
-                  color: Colors.black,
+                  color: Color.fromARGB(255, 125, 125, 125),
                   shape: BoxShape.circle,
                 ),
               ),
@@ -203,7 +203,7 @@ class _ResultScreenState extends ConsumerState<ResultScreen2> {
                 width: 30,
                 height: 30,
                 decoration: BoxDecoration(
-                  color: Colors.black,
+                  color: Color.fromARGB(255, 125, 125, 125),
                   shape: BoxShape.circle,
                 ),
               ),
@@ -218,7 +218,7 @@ class _ResultScreenState extends ConsumerState<ResultScreen2> {
                 width: 30,
                 height: 30,
                 decoration: BoxDecoration(
-                  color: Colors.black,
+                  color: Color.fromARGB(255, 125, 125, 125),
                   shape: BoxShape.circle,
                 ),
               ),
@@ -233,7 +233,7 @@ class _ResultScreenState extends ConsumerState<ResultScreen2> {
                 width: 30,
                 height: 30,
                 decoration: BoxDecoration(
-                  color: Colors.black,
+                  color: Color.fromARGB(255, 125, 125, 125),
                   shape: BoxShape.circle,
                 ),
               ),

@@ -83,6 +83,9 @@ class _ChoiceWomanScreenState extends ConsumerState<ChoiceWomanScreen> {
                       ),
                     ),
                   ),
+            const SizedBox(
+              height: 30,
+            ),
             SizedBox(
               width: _screenSize.width * 0.7,
               child: ElevatedButton(

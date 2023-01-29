@@ -86,7 +86,7 @@ class _ChoiceMenScreenState extends ConsumerState<ChoiceMenScreen> {
                       ),
                     ),
                   ),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             SizedBox(
