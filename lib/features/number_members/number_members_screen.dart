@@ -21,49 +21,53 @@ class _NumberMembersScreen extends ConsumerState<NumberMembersScreen> {
   @override
   Widget build(BuildContext context) {
     var _screenSize = MediaQuery.of(context).size;
-    final numberOfMember = ref.watch(numberProvider);
 
     return Scaffold(
       body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Text(
-              '女性5人と男性5人なら「5」って具合に',
-            ),
-            const Text(
-              '2人1組でラブマゲドンしたい人数を入力してな',
-            ),
-            const SizedBox(height: 15),
-            SizedBox(
-                width: _screenSize.width * 0.4,
-                child: DropdownButton(
-                  hint: const Text('人数を選んで'),
-                  isExpanded: true,
-                  value: _selectedItem,
-                  items: items
-                      .map((item) => DropdownMenuItem<int>(
-                            alignment: AlignmentDirectional.center,
-                            value: item,
-                            child: Text(item.toString()),
-                          ))
-                      .toList(),
-                  onChanged: (int? value) {
-                    ref.read(numberProvider.notifier).state = value!;
-                    setState(() {
-                      _selectedItem = value;
-                    });
-                  },
-                )),
-            const SizedBox(height: 40),
-            SizedBox(
-              width: _screenSize.width * 0.7,
-              child: ElevatedButton(
-                onPressed: () => _moveStep(context),
-                child: const Text('次へ'),
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: _screenSize.width * 0.1),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Text(
+                '女性5人と男性5人なら「5」って具合に',
+                textAlign: TextAlign.center,
               ),
-            ),
-          ],
+              const Text(
+                '2人1組でラブマゲドンしたい人数を入力してね',
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 15),
+              SizedBox(
+                  width: _screenSize.width * 0.4,
+                  child: DropdownButton(
+                    hint: const Text('人数を選んで'),
+                    isExpanded: true,
+                    value: _selectedItem,
+                    items: items
+                        .map((item) => DropdownMenuItem<int>(
+                              alignment: AlignmentDirectional.center,
+                              value: item,
+                              child: Text(item.toString()),
+                            ))
+                        .toList(),
+                    onChanged: (int? value) {
+                      ref.read(numberProvider.notifier).state = value!;
+                      setState(() {
+                        _selectedItem = value;
+                      });
+                    },
+                  )),
+              const SizedBox(height: 40),
+              SizedBox(
+                width: _screenSize.width * 0.7,
+                child: ElevatedButton(
+                  onPressed: () => _moveStep(context),
+                  child: const Text('次へ'),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

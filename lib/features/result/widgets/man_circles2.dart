@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lovemageddon/providers/providers.dart';
+import 'package:lovemageddon/theme/pallete.dart';
 
 class ManCircles2 extends ConsumerWidget {
   final double verticalPosition;
@@ -21,8 +22,8 @@ class ManCircles2 extends ConsumerWidget {
           Container(
             width: 50,
             height: 50,
-            decoration: BoxDecoration(
-              color: Colors.blue,
+            decoration: const BoxDecoration(
+              color: Pallete.secondaryColor,
               shape: BoxShape.circle,
             ),
           ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lovemageddon/features/number_members/number_members_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lovemageddon/theme/pallete.dart';
 
 void main() {
   runApp(const ProviderScope(
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Colors.amber[300],
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
-            backgroundColor: const Color.fromRGBO(239, 128, 125, 1),
+            backgroundColor: Pallete.primaryColor,
             minimumSize: const Size(double.infinity, 50),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20),

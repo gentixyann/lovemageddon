@@ -46,75 +46,78 @@ class _ChoiceWomanScreenState extends ConsumerState<ChoiceWomanScreen> {
 
     return Scaffold(
       body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            (isFinished)
-                ? const Text('次はマッチングできたか確認')
-                : Text('${manNameList[_counter]}は誰を選ぶ？'),
-            (isFinished)
-                ? const Text('お楽しみに')
-                : SizedBox(
-                    width: _screenSize.width * 0.4,
-                    child: Form(
-                      key: _formKey,
-                      child: DropdownButtonFormField(
-                        validator: (value) {
-                          if (value == null) {
-                            return 'お相手を選んでね！';
-                          }
-                          return null;
-                        },
-                        hint: const Text('好きな人入れて'),
-                        isExpanded: true,
-                        value: _selectedName,
-                        items: womanNameList
-                            .map((item) => DropdownMenuItem<String>(
-                                  alignment: AlignmentDirectional.center,
-                                  value: item,
-                                  child: Text(item),
-                                ))
-                            .toList(),
-                        onChanged: (String? value) {
-                          setState(() {
-                            _selectedName = value;
-                          });
-                        },
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: _screenSize.width * 0.1),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              (isFinished)
+                  ? const Text('次はマッチングできたか確認')
+                  : Text('${manNameList[_counter]}は誰を選ぶ？'),
+              (isFinished)
+                  ? const Text('お楽しみに')
+                  : SizedBox(
+                      width: _screenSize.width * 0.4,
+                      child: Form(
+                        key: _formKey,
+                        child: DropdownButtonFormField(
+                          validator: (value) {
+                            if (value == null) {
+                              return 'お相手を選んでね！';
+                            }
+                            return null;
+                          },
+                          hint: const Text('好きな人入れて'),
+                          isExpanded: true,
+                          value: _selectedName,
+                          items: womanNameList
+                              .map((item) => DropdownMenuItem<String>(
+                                    alignment: AlignmentDirectional.center,
+                                    value: item,
+                                    child: Text(item),
+                                  ))
+                              .toList(),
+                          onChanged: (String? value) {
+                            setState(() {
+                              _selectedName = value;
+                            });
+                          },
+                        ),
                       ),
                     ),
-                  ),
-            const SizedBox(
-              height: 30,
-            ),
-            SizedBox(
-              width: _screenSize.width * 0.7,
-              child: ElevatedButton(
-                onPressed: () {
-                  if (!isFinished) {
-                    if (_formKey.currentState!.validate()) {
-                      final int womanIndex =
-                          womanNameList.indexOf(_selectedName!);
-                      final int manIndex =
-                          manNameList.indexOf(manNameList[_counter]);
-
-                      ref
-                          .watch(manSelectedIntProvider.notifier)
-                          .state[manIndex] = womanIndex;
-                      ref
-                          .read(manSelectedProvider.notifier)
-                          .state[manNameList[_counter]] = _selectedName;
-                      print(manSelectedList);
-                      print(manSelectedIntList);
-                      _incrementCounter(numberOfMember);
-                    }
-                  } else {
-                    _moveStep(context);
-                  }
-                },
-                child: const Text('次へ'),
+              const SizedBox(
+                height: 30,
               ),
-            ),
-          ],
+              SizedBox(
+                width: _screenSize.width * 0.7,
+                child: ElevatedButton(
+                  onPressed: () {
+                    if (!isFinished) {
+                      if (_formKey.currentState!.validate()) {
+                        final int womanIndex =
+                            womanNameList.indexOf(_selectedName!);
+                        final int manIndex =
+                            manNameList.indexOf(manNameList[_counter]);
+
+                        ref
+                            .watch(manSelectedIntProvider.notifier)
+                            .state[manIndex] = womanIndex;
+                        ref
+                            .read(manSelectedProvider.notifier)
+                            .state[manNameList[_counter]] = _selectedName;
+                        print(manSelectedList);
+                        print(manSelectedIntList);
+                        _incrementCounter(numberOfMember);
+                      }
+                    } else {
+                      _moveStep(context);
+                    }
+                  },
+                  child: const Text('次へ'),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -6,7 +6,7 @@ class FinalScreen extends ConsumerWidget {
   const FinalScreen({super.key});
 
   void _moveStep(BuildContext ctx) {
-    Navigator.push(
+    Navigator.pushReplacement(
         ctx, MaterialPageRoute(builder: (ctx) => const NumberMembersScreen()));
   }
 
@@ -16,25 +16,31 @@ class FinalScreen extends ConsumerWidget {
 
     return Scaffold(
       body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Text(
-              'お疲れ様でした！',
-            ),
-            const Text('カップル成立した？'),
-            const Text('成立した方々はぜひラブマゲドンして来てね！'),
-            const SizedBox(
-              height: 30,
-            ),
-            SizedBox(
-              width: _screenSize.width * 0.7,
-              child: ElevatedButton(
-                onPressed: () => _moveStep(context),
-                child: const Text('もう一度'),
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: _screenSize.width * 0.1),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Text(
+                'お疲れ様でした！',
               ),
-            ),
-          ],
+              const Text('カップル成立した？'),
+              const Text(
+                '成立した方々はぜひラブマゲドンして来てね！',
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              SizedBox(
+                width: _screenSize.width * 0.7,
+                child: ElevatedButton(
+                  onPressed: () => _moveStep(context),
+                  child: const Text('もう一度'),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

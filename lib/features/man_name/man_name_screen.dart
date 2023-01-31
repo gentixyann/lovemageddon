@@ -22,55 +22,58 @@ class ManNameScreen extends ConsumerWidget {
 
     return Scaffold(
       body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Text(
-              '参加する男性陣の名前を入力してな〜',
-            ),
-            SizedBox(
-              width: _screenSize.width * 0.8,
-              height: _screenSize.height * 0.5,
-              child: Form(
-                key: _formKey,
-                child: ListView.builder(
-                    itemCount: numberOfMember,
-                    itemBuilder: (BuildContext context, int index) {
-                      int memberIndex = index + 1;
-                      String memberIndexText = memberIndex.toString();
-                      return TextFormField(
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return '名前入れてね！';
-                          }
-                          return null;
-                        },
-                        controller: _nameController[index],
-                        maxLength: 7,
-                        maxLines: 1,
-                        decoration:
-                            InputDecoration(hintText: '$memberIndexText人目の名前'),
-                      );
-                    }),
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: _screenSize.width * 0.1),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Text(
+                '参加する男性陣の名前を入力してな〜',
               ),
-            ),
-            SizedBox(
-              width: _screenSize.width * 0.7,
-              child: ElevatedButton(
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    final nameList = [
-                      for (int i = 0; i < numberOfMember; i++)
-                        _nameController[i].text
-                    ];
-                    ref.read(manNameProvider.notifier).state = nameList;
-                    _moveStep(context);
-                  }
-                },
-                child: const Text('次へ'),
+              SizedBox(
+                width: _screenSize.width * 0.8,
+                height: _screenSize.height * 0.5,
+                child: Form(
+                  key: _formKey,
+                  child: ListView.builder(
+                      itemCount: numberOfMember,
+                      itemBuilder: (BuildContext context, int index) {
+                        int memberIndex = index + 1;
+                        String memberIndexText = memberIndex.toString();
+                        return TextFormField(
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return '名前入れてね！';
+                            }
+                            return null;
+                          },
+                          controller: _nameController[index],
+                          maxLength: 7,
+                          maxLines: 1,
+                          decoration: InputDecoration(
+                              hintText: '$memberIndexText人目の名前'),
+                        );
+                      }),
+                ),
               ),
-            ),
-          ],
+              SizedBox(
+                width: _screenSize.width * 0.7,
+                child: ElevatedButton(
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      final nameList = [
+                        for (int i = 0; i < numberOfMember; i++)
+                          _nameController[i].text
+                      ];
+                      ref.read(manNameProvider.notifier).state = nameList;
+                      _moveStep(context);
+                    }
+                  },
+                  child: const Text('次へ'),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
