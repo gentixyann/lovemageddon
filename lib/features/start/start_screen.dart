@@ -5,6 +5,16 @@ class StartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    var _screenSize = MediaQuery.of(context).size;
+    return Scaffold(
+      body: Center(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: _screenSize.width * 0.1),
+          child: Column(
+            children: [],
+          ),
+        ),
+      ),
+    );
   }
 }
