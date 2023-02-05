@@ -29,13 +29,10 @@ class _NumberMembersScreen extends ConsumerState<NumberMembersScreen> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Text(
-                '女性5人と男性5人なら「5」って具合に',
+              Text(
+                '女性5人 : 男性5人なら「5」って具合に、モテマゲドンしたい人数を入力してね',
                 textAlign: TextAlign.center,
-              ),
-              const Text(
-                '2人1組でラブマゲドンしたい人数を入力してね',
-                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.bodyText1,
               ),
               const SizedBox(height: 15),
               SizedBox(

@@ -47,7 +47,7 @@ class WomanNameScreen extends ConsumerWidget {
                           return null;
                         },
                         controller: _nameController[index],
-                        maxLength: 7,
+                        maxLength: 5,
                         maxLines: 1,
                         decoration:
                             InputDecoration(hintText: '$memberIndexText人目の名前'),

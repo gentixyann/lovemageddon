@@ -55,8 +55,20 @@ class _ChoiceMenScreenState extends ConsumerState<ChoiceMenScreen> {
             mainAxisSize: MainAxisSize.min,
             children: [
               (isFinished)
-                  ? const Text('次は男性が選ぶよ！')
-                  : Text('${womanNameList[_counter]}は誰を選ぶ？'),
+                  ? Text(
+                      '次は男性が選ぶよ！',
+                      style: Theme.of(context).textTheme.bodyText1,
+                    )
+                  : Column(
+                      children: [
+                        const Text('カップルになりたい相手を選んでね！'),
+                        Text(
+                          '「${womanNameList[_counter]}」は誰を選ぶ？',
+                          style: Theme.of(context).textTheme.bodyText1,
+                        ),
+                      ],
+                    ),
+              const SizedBox(height: 40),
               (isFinished)
                   ? const Text('お楽しみに')
                   : SizedBox(
@@ -70,7 +82,7 @@ class _ChoiceMenScreenState extends ConsumerState<ChoiceMenScreen> {
                             }
                             return null;
                           },
-                          hint: const Text('好きな人入れて'),
+                          hint: const Text('誰が良い？'),
                           isExpanded: true,
                           value: _selectedName,
                           items: manNameList

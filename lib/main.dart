@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lovemageddon/features/number_members/number_members_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lovemageddon/features/start/start_screen.dart';
 import 'package:lovemageddon/theme/pallete.dart';
 
 void main() {
@@ -18,6 +19,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         // primarySwatch: Colors.blue,
         primaryColor: Colors.amber[300],
@@ -32,14 +34,17 @@ class MyApp extends StatelessWidget {
         ),
         textTheme: GoogleFonts.kosugiMaruTextTheme(
           const TextTheme(
-            bodyText2: TextStyle(
-              fontSize: 15,
-              height: 1.5,
-            ),
-          ),
+              bodyText2: TextStyle(
+                fontSize: 15,
+                height: 1.5,
+              ),
+              bodyText1: TextStyle(
+                fontSize: 18,
+                height: 1.5,
+              )),
         ),
       ),
-      home: const NumberMembersScreen(),
+      home: const StartScreen(),
     );
   }
 }

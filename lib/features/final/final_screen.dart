@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:lovemageddon/features/number_members/number_members_screen.dart';
+import 'package:lovemageddon/features/start/start_screen.dart';
 
 class FinalScreen extends ConsumerWidget {
   const FinalScreen({super.key});
 
   void _moveStep(BuildContext ctx) {
     Navigator.pushReplacement(
-        ctx, MaterialPageRoute(builder: (ctx) => const NumberMembersScreen()));
+        ctx, MaterialPageRoute(builder: (ctx) => const StartScreen()));
   }
 
   @override
@@ -24,10 +24,15 @@ class FinalScreen extends ConsumerWidget {
               const Text(
                 'お疲れ様でした！',
               ),
-              const Text('カップル成立した？'),
-              const Text(
+              const SizedBox(height: 40),
+              Text(
+                'カップル成立した？',
+                style: Theme.of(context).textTheme.bodyText1,
+              ),
+              Text(
                 '成立した方々はぜひラブマゲドンして来てね！',
                 textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.bodyText1,
               ),
               const SizedBox(
                 height: 30,
