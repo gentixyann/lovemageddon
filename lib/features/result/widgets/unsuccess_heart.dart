@@ -7,11 +7,10 @@ class UnsuccessHeart extends StatelessWidget {
   Widget build(BuildContext context) {
     var _screenSize = MediaQuery.of(context).size;
     return Container(
-      width: _screenSize.width * 0.45,
+      width: _screenSize.width * 0.47,
       height: _screenSize.height * 0.22,
       child: Image.asset(
         'assets/images/unsuccess.png',
-        fit: BoxFit.cover,
       ),
     );
     ;

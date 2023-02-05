@@ -11,7 +11,6 @@ class SuccessHeart extends StatelessWidget {
       height: _screenSize.height * 0.2,
       child: Image.asset(
         'assets/images/success.png',
-        fit: BoxFit.cover,
       ),
     );
   }

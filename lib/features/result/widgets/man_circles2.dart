@@ -17,7 +17,7 @@ class ManCircles2 extends ConsumerWidget {
       alignment: Alignment(0.9, verticalPosition),
       child: Column(
         mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Container(
             width: 50,
