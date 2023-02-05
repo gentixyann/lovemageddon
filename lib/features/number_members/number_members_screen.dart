@@ -29,6 +29,13 @@ class _NumberMembersScreen extends ConsumerState<NumberMembersScreen> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
+              SizedBox(
+                width: 100,
+                height: 100,
+                child: Image.asset(
+                  'assets/images/app_images.001.png',
+                ),
+              ),
               Text(
                 '女性5人 : 男性5人なら「5」って具合に、モテマゲドンしたい人数を入力してね',
                 textAlign: TextAlign.center,
@@ -38,7 +45,7 @@ class _NumberMembersScreen extends ConsumerState<NumberMembersScreen> {
               SizedBox(
                   width: _screenSize.width * 0.4,
                   child: DropdownButton(
-                    hint: const Text('人数を選んで'),
+                    hint: const Text('人数を選んでね'),
                     isExpanded: true,
                     value: _selectedItem,
                     items: items

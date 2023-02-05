@@ -21,7 +21,7 @@ class StartScreen extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Container(
+              SizedBox(
                 width: _screenSize.width * 0.8,
                 height: _screenSize.height * 0.3,
                 child: Image.asset(
@@ -31,14 +31,14 @@ class StartScreen extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Container(
+                  SizedBox(
                     width: 100,
                     height: 100,
                     child: Image.asset(
                       'assets/images/item2.png',
                     ),
                   ),
-                  Container(
+                  SizedBox(
                     width: 100,
                     height: 100,
                     child: Image.asset(
