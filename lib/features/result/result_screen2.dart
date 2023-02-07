@@ -40,6 +40,8 @@ class _ResultScreenState extends ConsumerState<ResultScreen2> {
     final Map<int, int?> womanSelectedIntList =
         ref.watch(womanSelectedIntProvider);
     final Map<int, int?> manSelectedIntList = ref.watch(manSelectedIntProvider);
+    final int numberOfMember = ref.watch(numberProvider);
+
     final lastNum = numberOfMember - 1;
 
     if (_womenTurn) {
