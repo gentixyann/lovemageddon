@@ -25,9 +25,6 @@ class _WomanNameScreenState extends ConsumerState<WomanNameScreen> {
     var _screenSize = MediaQuery.of(context).size;
     final numberOfMember = ref.watch(numberProvider);
 
-    // List<TextEditingController> _nameController =
-    //     List.generate(numberOfMember, (i) => TextEditingController());
-
     return Scaffold(
         body: Center(
       child: SingleChildScrollView(

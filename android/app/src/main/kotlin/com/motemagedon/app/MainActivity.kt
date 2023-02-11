@@ -1,4 +1,4 @@
-package com.example.lovemageddon
+package com.motemagedon.app
 
 import io.flutter.embedding.android.FlutterActivity
 
