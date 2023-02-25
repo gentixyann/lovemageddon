@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lovemageddon/features/choice_men/choice_men_screen.dart';
 import 'package:lovemageddon/providers/providers.dart';
+import 'package:lovemageddon/theme/pallete.dart';
 
 class ManNameScreen extends ConsumerWidget {
   ManNameScreen({super.key});
@@ -28,9 +29,13 @@ class ManNameScreen extends ConsumerWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Text(
-                  '参加する男性陣の名前を入力してな〜',
-                ),
+                const Text.rich(TextSpan(children: [
+                  TextSpan(text: '参加する'),
+                  TextSpan(
+                      text: '男性',
+                      style: TextStyle(color: Pallete.secondaryColor)),
+                  TextSpan(text: '陣の名前を入力してな〜'),
+                ])),
                 SizedBox(
                   width: _screenSize.width * 0.8,
                   height: _screenSize.height * 0.5,

@@ -40,9 +40,6 @@ class _WomanNameScreenState extends ConsumerState<WomanNameScreen> {
                     text: '女性', style: TextStyle(color: Pallete.primaryColor)),
                 TextSpan(text: '陣の名前を入力してな〜'),
               ])),
-              // const Text(
-              //   '参加する女性陣の名前を入力してな〜',
-              // ),
               SizedBox(
                 width: _screenSize.width * 0.8,
                 height: _screenSize.height * 0.5,
