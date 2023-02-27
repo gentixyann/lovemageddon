@@ -66,6 +66,9 @@ class ManNameScreen extends ConsumerWidget {
                 SizedBox(
                   width: _screenSize.width * 0.7,
                   child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Pallete.secondaryColor,
+                    ),
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         final nameList = [
