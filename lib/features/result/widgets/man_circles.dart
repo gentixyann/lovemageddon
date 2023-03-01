@@ -3,10 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lovemageddon/providers/providers.dart';
 import 'package:lovemageddon/theme/pallete.dart';
 
-class ManCircles2 extends ConsumerWidget {
+class ManCircles extends ConsumerWidget {
   final double verticalPosition;
   final String manName;
-  const ManCircles2(
+  const ManCircles(
       {super.key, required this.verticalPosition, required this.manName});
 
   @override

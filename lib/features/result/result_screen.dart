@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lovemageddon/features/final/final_screen.dart';
-import 'package:lovemageddon/features/result/widgets/man_circles2.dart';
+import 'package:lovemageddon/features/result/widgets/man_circles.dart';
 import 'package:lovemageddon/features/result/widgets/success_heart.dart';
 import 'package:lovemageddon/features/result/widgets/unsuccess_heart.dart';
-import 'package:lovemageddon/features/result/widgets/women_circles2.dart';
+import 'package:lovemageddon/features/result/widgets/women_circles.dart';
 import 'package:lovemageddon/providers/providers.dart';
 import 'dart:async';
 
-class ResultScreen2 extends ConsumerStatefulWidget {
-  const ResultScreen2({super.key});
+class ResultScreen extends ConsumerStatefulWidget {
+  const ResultScreen({super.key});
 
   @override
-  ConsumerState<ResultScreen2> createState() => _ResultScreenState();
+  ConsumerState<ResultScreen> createState() => _ResultScreenState();
 }
 
-class _ResultScreenState extends ConsumerState<ResultScreen2> {
+class _ResultScreenState extends ConsumerState<ResultScreen> {
   // 始点の縦軸（Y）のポジション
   List<double> vertical_position = [-0.8, -0.5, -0.2, 0.1, 0.4];
   // 繋げるマルの横軸（X）のポジション
@@ -162,12 +162,12 @@ class _ResultScreenState extends ConsumerState<ResultScreen2> {
         fit: StackFit.expand,
         children: [
           for (var i = 0; i < numberOfMember; i++)
-            WomanCircles2(
+            WomanCircles(
               verticalPosition: vertical_position[i],
               womanName: womanNameList[i],
             ),
           for (var i = 0; i < numberOfMember; i++)
-            ManCircles2(
+            ManCircles(
               verticalPosition: vertical_position[i],
               manName: manNameList[i],
             ),

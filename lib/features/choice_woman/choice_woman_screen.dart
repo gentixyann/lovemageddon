@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:lovemageddon/features/result/result_screen2.dart';
+import 'package:lovemageddon/features/result/result_screen.dart';
 import 'package:lovemageddon/providers/providers.dart';
 import 'package:lovemageddon/theme/pallete.dart';
 
@@ -33,7 +33,7 @@ class _ChoiceWomanScreenState extends ConsumerState<ChoiceWomanScreen> {
 
   void _moveStep(BuildContext ctx) {
     Navigator.pushReplacement(
-        ctx, MaterialPageRoute(builder: (ctx) => ResultScreen2()));
+        ctx, MaterialPageRoute(builder: (ctx) => const ResultScreen()));
   }
 
   @override
