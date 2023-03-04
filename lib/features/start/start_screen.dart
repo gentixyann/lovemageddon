@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:lovemageddon/features/faq/faq_screen.dart';
 import 'package:lovemageddon/features/number_members/number_members_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -9,6 +10,10 @@ class StartScreen extends StatelessWidget {
   void _moveStep(BuildContext ctx) {
     Navigator.pushReplacement(
         ctx, MaterialPageRoute(builder: (ctx) => const NumberMembersScreen()));
+  }
+
+  void _moveFaq(BuildContext ctx) {
+    Navigator.push(ctx, MaterialPageRoute(builder: (ctx) => const FaqScreen()));
   }
 
   @override
@@ -55,6 +60,14 @@ class StartScreen extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () => _moveStep(context),
                   child: const Text('スタート'),
+                ),
+              ),
+              const SizedBox(height: 20),
+              SizedBox(
+                width: _screenSize.width * 0.7,
+                child: ElevatedButton(
+                  onPressed: () => _moveFaq(context),
+                  child: const Text('FAQなど'),
                 ),
               ),
               const SizedBox(height: 40),
