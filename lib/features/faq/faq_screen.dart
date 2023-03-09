@@ -28,7 +28,8 @@ class FaqScreen extends StatelessWidget {
                     color: Pallete.primaryPaleColor,
                     borderRadius: BorderRadius.circular(20),
                   ),
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                   child: Text(
                     '女男で別々の人数なんですけど！！',
                     style: Theme.of(context).textTheme.bodyText2,
@@ -36,9 +37,21 @@ class FaqScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 5),
-              Text(
-                'web版ならもっと自由度が高いのでできます！',
-                style: Theme.of(context).textTheme.bodyText2,
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Container(
+                  width: _screenSize.width * 0.6,
+                  decoration: BoxDecoration(
+                    color: Pallete.secondaryPaleColor,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  child: Text(
+                    'もっと自由度が高いweb版ならできます！',
+                    style: Theme.of(context).textTheme.bodyText2,
+                  ),
+                ),
               ),
             ],
           ),
