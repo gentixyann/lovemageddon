@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:lovemageddon/features/choice_men/widgets/character1.dart';
 import 'package:lovemageddon/features/choice_woman/choice_woman_screen.dart';
 import 'package:lovemageddon/providers/providers.dart';
 
@@ -33,7 +34,7 @@ class _ChoiceMenScreenState extends ConsumerState<ChoiceMenScreen> {
 
   void _moveStep(BuildContext ctx) {
     Navigator.pushReplacement(
-        ctx, MaterialPageRoute(builder: (ctx) => ChoiceWomanScreen()));
+        ctx, MaterialPageRoute(builder: (ctx) => const ChoiceWomanScreen()));
   }
 
   @override
@@ -54,6 +55,17 @@ class _ChoiceMenScreenState extends ConsumerState<ChoiceMenScreen> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
+              SizedBox(
+                width: _screenSize.width * 0.9,
+                height: _screenSize.height * 0.2,
+                child: Stack(
+                  fit: StackFit.expand,
+                  children: [
+                    const Character1(),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 40),
               (isFinished)
                   ? Text(
                       '次は男性が選ぶよ！',
