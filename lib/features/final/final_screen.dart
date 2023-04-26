@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lovemageddon/features/start/start_screen.dart';
+import 'package:lovemageddon/widgets/character.dart';
 
 class FinalScreen extends ConsumerWidget {
   const FinalScreen({super.key});
@@ -21,6 +22,26 @@ class FinalScreen extends ConsumerWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  SizedBox(
+                    width: _screenSize.width * 0.3,
+                    height: _screenSize.height * 0.1,
+                    child: const Character(
+                      num: 3,
+                    ),
+                  ),
+                  SizedBox(
+                    width: _screenSize.width * 0.3,
+                    height: _screenSize.height * 0.1,
+                    child: const Character(
+                      num: 4,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 10),
               const Text(
                 'お疲れ様でした！',
               ),

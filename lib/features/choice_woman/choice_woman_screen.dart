@@ -60,6 +60,7 @@ class _ChoiceWomanScreenState extends ConsumerState<ChoiceWomanScreen> {
                   num: 1,
                 ),
               ),
+              const SizedBox(height: 10),
               (isFinished)
                   ? Text(
                       '次はマッチングできたか確認するよ！',
