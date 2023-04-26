@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:lovemageddon/features/choice_men/widgets/character1.dart';
 import 'package:lovemageddon/features/choice_woman/choice_woman_screen.dart';
 import 'package:lovemageddon/providers/providers.dart';
+import 'package:lovemageddon/widgets/character.dart';
 
 class ChoiceMenScreen extends ConsumerStatefulWidget {
   const ChoiceMenScreen({super.key});
@@ -57,15 +57,12 @@ class _ChoiceMenScreenState extends ConsumerState<ChoiceMenScreen> {
             children: [
               SizedBox(
                 width: _screenSize.width * 0.9,
-                height: _screenSize.height * 0.2,
-                child: Stack(
-                  fit: StackFit.expand,
-                  children: [
-                    const Character1(),
-                  ],
+                height: _screenSize.height * 0.1,
+                child: const Character(
+                  num: 2,
                 ),
               ),
-              const SizedBox(height: 40),
+              const SizedBox(height: 10),
               (isFinished)
                   ? Text(
                       '次は男性が選ぶよ！',

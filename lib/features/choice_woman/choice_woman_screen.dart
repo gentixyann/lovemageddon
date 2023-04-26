@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lovemageddon/features/result/result_screen.dart';
 import 'package:lovemageddon/providers/providers.dart';
 import 'package:lovemageddon/theme/pallete.dart';
+import 'package:lovemageddon/widgets/character.dart';
 
 class ChoiceWomanScreen extends ConsumerStatefulWidget {
   const ChoiceWomanScreen({super.key});
@@ -52,6 +53,13 @@ class _ChoiceWomanScreenState extends ConsumerState<ChoiceWomanScreen> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
+              SizedBox(
+                width: _screenSize.width * 0.9,
+                height: _screenSize.height * 0.1,
+                child: const Character(
+                  num: 1,
+                ),
+              ),
               (isFinished)
                   ? Text(
                       '次はマッチングできたか確認するよ！',
