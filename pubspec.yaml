@@ -38,8 +38,8 @@ dependencies:
   flutter_riverpod: ^2.1.1
   google_fonts: ^4.0.1
   flutter_launcher_icons: ^0.11.0
-  flutter_native_splash: ^2.2.16
   url_launcher: ^6.1.8
+  flutter_native_splash: ^2.2.16
 
 dev_dependencies:
   flutter_test:
@@ -57,11 +57,11 @@ flutter_icons:
   ios: true
   image_path: 'assets/icon/icon.001.png'
 
-flutter_native_splash:
-  color: '#ffffff'
-  image: assets/splash/splash_screen.001.png
-  android: true
-  ios: true
+# flutter_native_splash:
+#   color: '#ffffff'
+#   image: assets/splash/splash_screen.001.png
+#   android: true
+#   ios: true
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
