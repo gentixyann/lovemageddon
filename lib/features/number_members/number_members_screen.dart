@@ -39,7 +39,7 @@ class _NumberMembersScreen extends ConsumerState<NumberMembersScreen> {
               Text(
                 '女性5人 : 男性5人なら「5」って具合に、モテマゲドンしたい人数を入力してね',
                 textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.bodyText1,
+                style: Theme.of(context).textTheme.bodyLarge,
               ),
               const SizedBox(height: 15),
               SizedBox(

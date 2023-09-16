@@ -64,14 +64,14 @@ class _ChoiceWomanScreenState extends ConsumerState<ChoiceWomanScreen> {
               (isFinished)
                   ? Text(
                       '次はマッチングできたか確認するよ！',
-                      style: Theme.of(context).textTheme.bodyText1,
+                      style: Theme.of(context).textTheme.bodyLarge,
                     )
                   : Column(
                       children: [
                         const Text('カップルになりたい相手を選んでね！'),
                         Text(
                           '「${manNameList[_counter]}」は誰を選ぶ？',
-                          style: Theme.of(context).textTheme.bodyText1,
+                          style: Theme.of(context).textTheme.bodyLarge,
                         ),
                       ],
                     ),

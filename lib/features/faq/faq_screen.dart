@@ -20,7 +20,7 @@ class FaqScreen extends StatelessWidget {
                 Text(
                   'よくある質問など！',
                   textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.headline6,
+                  style: Theme.of(context).textTheme.titleLarge,
                 ),
                 const SizedBox(height: 40),
                 Align(
@@ -35,7 +35,7 @@ class FaqScreen extends StatelessWidget {
                         horizontal: 20, vertical: 10),
                     child: Text(
                       '女男で別々の人数なんですけど！！🥺',
-                      style: Theme.of(context).textTheme.bodyText2,
+                      style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ),
                 ),
@@ -81,7 +81,7 @@ class FaqScreen extends StatelessWidget {
                         horizontal: 20, vertical: 10),
                     child: Text(
                       '不具合とか要望とか、色々と言いたいことあるんですけど！！😊',
-                      style: Theme.of(context).textTheme.bodyText2,
+                      style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ),
                 ),

@@ -33,14 +33,14 @@ class MyApp extends StatelessWidget {
         ),
         textTheme: GoogleFonts.kosugiMaruTextTheme(
           const TextTheme(
-              headline6: TextStyle(
+              titleLarge: TextStyle(
                 fontSize: 20,
               ),
-              bodyText2: TextStyle(
+              bodyMedium: TextStyle(
                 fontSize: 15,
                 height: 1.5,
               ),
-              bodyText1: TextStyle(
+              bodyLarge: TextStyle(
                 fontSize: 18,
                 height: 1.5,
               )),

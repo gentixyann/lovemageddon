@@ -48,12 +48,12 @@ class FinalScreen extends ConsumerWidget {
               const SizedBox(height: 40),
               Text(
                 'カップル成立した？',
-                style: Theme.of(context).textTheme.bodyText1,
+                style: Theme.of(context).textTheme.bodyLarge,
               ),
               Text(
                 '成立した方々はぜひラブマゲドンして来てね！',
                 textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.bodyText1,
+                style: Theme.of(context).textTheme.bodyLarge,
               ),
               const SizedBox(
                 height: 30,
