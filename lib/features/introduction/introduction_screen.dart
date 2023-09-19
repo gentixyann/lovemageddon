@@ -5,10 +5,21 @@ class IntroductionScreen extends StatefulWidget {
   const IntroductionScreen({super.key});
 
   @override
-  State<IntroductionScreen> createState() => _Introduction_ScreenState();
+  State<IntroductionScreen> createState() => _IntroductionScreenState();
 }
 
-class _Introduction_ScreenState extends State<IntroductionScreen> {
+class _IntroductionScreenState extends State<IntroductionScreen> {
+  final List<Map<String, dynamic>> _page = [
+    {
+      'image': 'assets/images/introduction',
+      'title': '遊び方をざっくり教えるね',
+      'description': 'モテマゲドンできることを祈ってます！',
+    }
+  ];
+
+  final PageController _pageController = PageController();
+  int _activePage = 0;
+
   _saveOptions() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     // 一度起動したらfirst_launchをfalseに設定する
