@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:lovemageddon/features/introduction/widgets/slide_section.dart';
+import 'package:lovemageddon/features/start/start_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class IntroductionScreen extends StatefulWidget {
@@ -9,7 +11,7 @@ class IntroductionScreen extends StatefulWidget {
 }
 
 class _IntroductionScreenState extends State<IntroductionScreen> {
-  final List<Map<String, dynamic>> _page = [
+  final List<Map<String, dynamic>> _pages = [
     {
       'image': 'assets/images/introduction',
       'title': '遊び方をざっくり教えるね',
@@ -20,6 +22,24 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
   final PageController _pageController = PageController();
   int _activePage = 0;
 
+  void _onNextPage() {
+    if (_activePage < _pages.length - 1) {
+      _pageController.nextPage(
+        duration: const Duration(milliseconds: 400),
+        curve: Curves.linear,
+      );
+    }
+  }
+
+  Future<void> _openStartScreen(BuildContext ctx) async {
+    await Navigator.pushAndRemoveUntil(
+        ctx,
+        MaterialPageRoute(
+          builder: (context) => const StartScreen(),
+        ),
+        (_) => false);
+  }
+
   _saveOptions() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     // 一度起動したらfirst_launchをfalseに設定する
@@ -27,16 +47,35 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: OutlinedButton(
-          onPressed: () {
-            _saveOptions();
-          },
-          child: const Text('Click Me'),
+  Widget build(BuildContext context) => Scaffold(
+        body: Padding(
+          padding: const EdgeInsets.only(
+            top: 20,
+            right: 20,
+            bottom: 60,
+            left: 20,
+          ),
+          child: Column(
+            children: [
+              Expanded(
+                child: PageView.builder(
+                  controller: _pageController,
+                  itemCount: _pages.length,
+                  onPageChanged: (int page) {
+                    setState(() {
+                      _activePage = page;
+                    });
+                  },
+                  itemBuilder: (BuildContext ctx, int index) => SlideSection(
+                    image: _pages[index]['image'],
+                    title: _pages[index]['title'],
+                    description: _pages[index]['description'],
+                  ),
+                ),
+              ),
+              Row()
+            ],
+          ),
         ),
-      ),
-    );
-  }
+      );
 }
