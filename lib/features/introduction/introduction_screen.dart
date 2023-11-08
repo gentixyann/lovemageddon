@@ -33,11 +33,12 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
 
   Future<void> _openStartScreen(BuildContext ctx) async {
     await Navigator.pushAndRemoveUntil(
-        ctx,
-        MaterialPageRoute(
-          builder: (context) => const StartScreen(),
-        ),
-        (_) => false);
+      ctx,
+      MaterialPageRoute(
+        builder: (context) => const StartScreen(),
+      ),
+      (_) => false,
+    );
   }
 
   _saveOptions() async {
@@ -76,6 +77,41 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
               Row()
             ],
           ),
+        ),
+      );
+
+  List<Widget> _buildIndicator() {
+    final indicators = <Widget>[];
+
+    for (var i = 0; i < _pages.length; i++) {
+      if (_activePage == i) {
+        indicators.add(_indicatorsTrue());
+      } else {
+        indicators.add(_indicatorsFalse());
+      }
+    }
+    return indicators;
+  }
+
+  Widget _indicatorsTrue() => AnimatedContainer(
+        duration: const Duration(microseconds: 3000),
+        height: 8,
+        width: 8,
+        margin: const EdgeInsets.only(right: 8),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(50),
+          color: const Color.fromRGBO(18, 20, 22, 1),
+        ),
+      );
+
+  Widget _indicatorsFalse() => AnimatedContainer(
+        duration: const Duration(microseconds: 3000),
+        height: 8,
+        width: 8,
+        margin: const EdgeInsets.only(right: 8),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(50),
+          color: Colors.grey[300],
         ),
       );
 }
