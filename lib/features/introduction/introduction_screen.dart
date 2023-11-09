@@ -13,7 +13,12 @@ class IntroductionScreen extends StatefulWidget {
 class _IntroductionScreenState extends State<IntroductionScreen> {
   final List<Map<String, dynamic>> _pages = [
     {
-      'image': 'assets/images/introduction',
+      'image': 'assets/images/introduction/item1.png',
+      'title': '遊び方をざっくり教えるね',
+      'description': 'モテマゲドンできることを祈ってます！',
+    },
+    {
+      'image': 'assets/images/introduction/item2.png',
       'title': '遊び方をざっくり教えるね',
       'description': 'モテマゲドンできることを祈ってます！',
     }
@@ -22,7 +27,7 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
   final PageController _pageController = PageController();
   int _activePage = 0;
 
-  void _onNextPage() {
+  void onNextPage() {
     if (_activePage < _pages.length - 1) {
       _pageController.nextPage(
         duration: const Duration(milliseconds: 400),
@@ -74,7 +79,48 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                   ),
                 ),
               ),
-              Row()
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: _buildIndicator(),
+                  ),
+                  if (_activePage == 3)
+                    SizedBox(
+                      width: 160,
+                      height: 48,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Theme.of(context).primaryColor,
+                          foregroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(42),
+                          ),
+                        ),
+                        onPressed: () async {
+                          await _openStartScreen(context);
+                        },
+                        child: const Align(
+                          alignment: Alignment.center,
+                          child: Text(
+                            'はじめる',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                    )
+                  else
+                    GestureDetector(
+                      onTap: onNextPage,
+                      child: const Icon(Icons.arrow_circle_right,
+                          size: 50 // アイコンの大きさを設定できる
+                          ),
+                    )
+                ],
+              ),
             ],
           ),
         ),
