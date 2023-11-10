@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lovemageddon/features/introduction/widgets/slide_section.dart';
 import 'package:lovemageddon/features/start/start_screen.dart';
+import 'package:lovemageddon/theme/pallete.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class IntroductionScreen extends StatefulWidget {
@@ -14,6 +15,16 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
   final List<Map<String, dynamic>> _pages = [
     {
       'image': 'assets/images/introduction/item1.png',
+      'title': '遊び方をざっくり教えるね',
+      'description': 'モテマゲドンできることを祈ってます！',
+    },
+    {
+      'image': 'assets/images/introduction/item2.png',
+      'title': '遊び方をざっくり教えるね',
+      'description': 'モテマゲドンできることを祈ってます！',
+    },
+    {
+      'image': 'assets/images/introduction/item2.png',
       'title': '遊び方をざっくり教えるね',
       'description': 'モテマゲドンできることを祈ってます！',
     },
@@ -91,8 +102,7 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                       height: 48,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Theme.of(context).primaryColor,
-                          foregroundColor: Colors.white,
+                          backgroundColor: Pallete.primaryColor,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(42),
                           ),
