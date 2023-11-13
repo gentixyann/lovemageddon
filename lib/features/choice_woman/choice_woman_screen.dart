@@ -63,7 +63,7 @@ class _ChoiceWomanScreenState extends ConsumerState<ChoiceWomanScreen> {
               const SizedBox(height: 10),
               (isFinished)
                   ? Text(
-                      '次はマッチングできたか確認するよ！',
+                      '次はマッチングできたか\n確認するよ！',
                       style: Theme.of(context).textTheme.bodyLarge,
                     )
                   : Column(
