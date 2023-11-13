@@ -20,18 +20,23 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
     },
     {
       'image': 'assets/images/introduction/item2.png',
-      'title': '遊び方をざっくり教えるね',
-      'description': 'モテマゲドンできることを祈ってます！',
+      'title': 'まずは参加人数を選択',
+      'description': '男性と女性の人数が違う場合は、架空の人物を使ったりして工夫してね！',
     },
     {
       'image': 'assets/images/introduction/item2.png',
-      'title': '遊び方をざっくり教えるね',
-      'description': 'モテマゲドンできることを祈ってます！',
+      'title': '参加者の名前を入力',
+      'description': '女性陣が入力し終えたら次は男性陣が入力',
     },
     {
       'image': 'assets/images/introduction/item2.png',
-      'title': '遊び方をざっくり教えるね',
-      'description': 'モテマゲドンできることを祈ってます！',
+      'title': '誰と結ばれたいか選んでね',
+      'description': '女性陣から順番にスマホを回して、気になるあの人を選んでみよう',
+    },
+    {
+      'image': 'assets/images/introduction/item2.png',
+      'title': '運命の瞬間',
+      'description': '誰と誰が両想いだったか、見届けみよう❤️',
     }
   ];
 
@@ -47,7 +52,7 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
     }
   }
 
-  Future<void> _openStartScreen(BuildContext ctx) async {
+  void _openStartScreen(BuildContext ctx) async {
     await Navigator.pushAndRemoveUntil(
       ctx,
       MaterialPageRoute(
@@ -96,7 +101,7 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                   Row(
                     children: _buildIndicator(),
                   ),
-                  if (_activePage == 3)
+                  if (_activePage == 4)
                     SizedBox(
                       width: 160,
                       height: 48,
@@ -107,8 +112,9 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                             borderRadius: BorderRadius.circular(42),
                           ),
                         ),
-                        onPressed: () async {
-                          await _openStartScreen(context);
+                        onPressed: () {
+                          _saveOptions();
+                          _openStartScreen(context);
                         },
                         child: const Align(
                           alignment: Alignment.center,
