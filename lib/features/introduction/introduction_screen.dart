@@ -14,27 +14,27 @@ class IntroductionScreen extends StatefulWidget {
 class _IntroductionScreenState extends State<IntroductionScreen> {
   final List<Map<String, dynamic>> _pages = [
     {
-      'image': 'assets/images/introduction/item1.png',
+      'image': 'assets/images/introduction/introduction.001.png',
       'title': '遊び方をざっくり教えるね',
       'description': 'モテマゲドンできることを祈ってます！',
     },
     {
-      'image': 'assets/images/introduction/item2.png',
+      'image': 'assets/images/introduction/introduction.002.png',
       'title': 'まずは参加人数を選択',
       'description': '男性と女性の人数が違う場合は、架空の人物を使ったりして工夫してね！',
     },
     {
-      'image': 'assets/images/introduction/item2.png',
+      'image': 'assets/images/introduction/introduction.003.png',
       'title': '参加者の名前を入力',
       'description': '女性陣が入力し終えたら次は男性陣が入力',
     },
     {
-      'image': 'assets/images/introduction/item2.png',
+      'image': 'assets/images/introduction/introduction.004.png',
       'title': '誰と結ばれたいか選んでね',
       'description': '女性陣から順番にスマホを回して、気になるあの人を選んでみよう',
     },
     {
-      'image': 'assets/images/introduction/item2.png',
+      'image': 'assets/images/introduction/introduction.005.png',
       'title': '運命の瞬間',
       'description': '誰と誰が両想いだったか、見届けみよう❤️',
     }
