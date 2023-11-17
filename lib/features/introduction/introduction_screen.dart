@@ -26,12 +26,12 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
     {
       'image': 'assets/images/introduction/introduction.003.png',
       'title': '参加者の名前を入力',
-      'description': '女性陣が入力し終えたら次は男性陣が入力',
+      'description': '女性陣が入力し終えたら次は男性陣が入力！\nドキドキ',
     },
     {
       'image': 'assets/images/introduction/introduction.004.png',
       'title': '誰と結ばれたいか選んでね',
-      'description': '女性陣から順番にスマホを回して、気になるあの人を選んでみよう',
+      'description': '女性陣から順番にスマホを回して、気になるあの人を選んでみよう！',
     },
     {
       'image': 'assets/images/introduction/introduction.005.png',
@@ -70,6 +70,7 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
+        backgroundColor: Colors.white,
         body: Padding(
           padding: const EdgeInsets.only(
             top: 20,
