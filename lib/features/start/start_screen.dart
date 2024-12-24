@@ -80,8 +80,8 @@ class StartScreen extends StatelessWidget {
                     text: "プライバシーポリシー",
                     recognizer: TapGestureRecognizer()
                       ..onTap = () async {
-                        final uri =
-                            Uri.parse("https://gengendiary.world/post-660/");
+                        final uri = Uri.parse(
+                            "https://jagged-blender-d57.notion.site/1658f34c2982813ab0d1e5e230077653");
                         launchUrl(uri);
                       }),
               ),
