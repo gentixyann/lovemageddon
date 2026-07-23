@@ -1,4 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+// Riverpod 3.0 で StateProvider などのレガシー API は legacy.dart へ移動した。
+// 既存の状態管理の挙動を変えずに互換を保つため、こちらを読み込む。
+import 'package:flutter_riverpod/legacy.dart';
 
 // 参加人数
 final numberProvider = StateProvider<int>((ref) {

@@ -1,30 +1,24 @@
-// This is a basic Flutter widget test.
+// アプリが例外なく起動・描画できることを確認する smoke テスト。
 //
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
+// このアプリは flutter_riverpod を使用するため、ルートを ProviderScope で
+// ラップしてから MyApp をポンプする。
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:lovemageddon/main.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
-
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
-
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
+  testWidgets('アプリがクラッシュせず起動する', (WidgetTester tester) async {
+    await tester.pumpWidget(
+      const ProviderScope(
+        child: MyApp(firstLaunch: false),
+      ),
+    );
     await tester.pump();
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    // MaterialApp が構築されていること（＝起動できたこと）を検証する。
+    expect(find.byType(MaterialApp), findsOneWidget);
   });
 }

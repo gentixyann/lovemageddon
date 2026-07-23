@@ -20,7 +20,8 @@ publish_to: "none" # Remove this line if you wish to publish to pub.dev
 version: 1.1.0+10
 
 environment:
-  sdk: ">=2.18.5 <3.0.0"
+  sdk: ^3.7.0
+  flutter: ">=3.41.0"
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -34,13 +35,14 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.2
-  flutter_riverpod: ^2.1.1
-  google_fonts: ^4.0.1
-  flutter_launcher_icons: ^0.11.0
-  url_launcher: ^6.1.8
-  flutter_native_splash: ^2.2.16
-  shared_preferences: ^2.2.1
+  # 組織ポリシーに従い、監査済みの安定版へバージョンを固定する。
+  cupertino_icons: 1.0.9
+  flutter_riverpod: 3.3.2
+  google_fonts: 8.2.0
+  url_launcher: 6.3.2
+  # 2.4.8 は meta ^1.18.0 を要求し現行 Flutter SDK(meta 1.17.0) と非互換のため 2.4.7 に固定
+  flutter_native_splash: 2.4.7
+  shared_preferences: 2.5.5
 
 dev_dependencies:
   flutter_test:
@@ -51,9 +53,11 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^2.0.0
+  flutter_lints: 6.0.0
+  # アイコン生成ツール（ビルド時のみ使用するため dev_dependencies へ）
+  flutter_launcher_icons: 0.14.4
 
-flutter_icons:
+flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
   image_path: "assets/icon/icon.001.png"
