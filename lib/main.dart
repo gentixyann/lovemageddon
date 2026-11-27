@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lovemageddon/features/introduction/introduction_screen.dart';
@@ -11,11 +11,7 @@ void main() async {
   final prefs = await SharedPreferences.getInstance();
   // 初回起動の時でfirst_launchが存在しなければtrueになる
   bool firstLaunch = prefs.getBool('first_launch') ?? true;
-  runApp(ProviderScope(
-    child: MyApp(
-      firstLaunch: firstLaunch,
-    ),
-  ));
+  runApp(ProviderScope(child: MyApp(firstLaunch: firstLaunch)));
 }
 
 class MyApp extends StatelessWidget {
@@ -42,17 +38,10 @@ class MyApp extends StatelessWidget {
         ),
         textTheme: GoogleFonts.kosugiMaruTextTheme(
           const TextTheme(
-              titleLarge: TextStyle(
-                fontSize: 20,
-              ),
-              bodyMedium: TextStyle(
-                fontSize: 15,
-                height: 1.5,
-              ),
-              bodyLarge: TextStyle(
-                fontSize: 18,
-                height: 1.5,
-              )),
+            titleLarge: TextStyle(fontSize: 20),
+            bodyMedium: TextStyle(fontSize: 15, height: 1.5),
+            bodyLarge: TextStyle(fontSize: 18, height: 1.5),
+          ),
         ),
       ),
       home: firstLaunch ? const IntroductionScreen() : const StartScreen(),

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class Pallete {
   static const primaryColor = Color.fromRGBO(239, 128, 125, 1);

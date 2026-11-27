@@ -1,17 +1,18 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lovemageddon/theme/pallete.dart';
 
 class WomanCircles extends ConsumerWidget {
   final double verticalPosition;
   final String womanName;
-  const WomanCircles(
-      {super.key, required this.verticalPosition, required this.womanName});
+  const WomanCircles({
+    super.key,
+    required this.verticalPosition,
+    required this.womanName,
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var _screenSize = MediaQuery.of(context).size;
-
     return Align(
       alignment: Alignment(-0.9, verticalPosition),
       child: Column(

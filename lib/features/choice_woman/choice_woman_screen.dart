@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lovemageddon/features/result/result_screen.dart';
 import 'package:lovemageddon/providers/providers.dart';
@@ -34,84 +34,85 @@ class _ChoiceWomanScreenState extends ConsumerState<ChoiceWomanScreen> {
 
   void _moveStep(BuildContext ctx) {
     Navigator.pushReplacement(
-        ctx, MaterialPageRoute(builder: (ctx) => const ResultScreen()));
+      ctx,
+      MaterialPageRoute(builder: (ctx) => const ResultScreen()),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    var _screenSize = MediaQuery.of(context).size;
+    var screenSize = MediaQuery.of(context).size;
+    ref.watch(manSelectedProvider);
     final int numberOfMember = ref.watch(numberProvider);
     final List<String> womanNameList = ref.watch(womanNameProvider);
     final List<String> manNameList = ref.watch(manNameProvider);
-    final Map<String, String?> manSelectedList = ref.watch(manSelectedProvider);
-    final Map<int, int?> manSelectedIntList = ref.watch(manSelectedIntProvider);
 
     return Scaffold(
       body: Center(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: _screenSize.width * 0.1),
+          padding: EdgeInsets.symmetric(horizontal: screenSize.width * 0.1),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               SizedBox(
-                width: _screenSize.width * 0.9,
-                height: _screenSize.height * 0.1,
-                child: const Character(
-                  num: 1,
-                ),
+                width: screenSize.width * 0.9,
+                height: screenSize.height * 0.1,
+                child: const Character(num: 1),
               ),
               const SizedBox(height: 10),
               (isFinished)
                   ? Text(
-                      '次はマッチングできたか\n確認するよ！',
-                      style: Theme.of(context).textTheme.bodyLarge,
-                    )
+                    '次はマッチングできたか\n確認するよ！',
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  )
                   : Column(
-                      children: [
-                        const Text('カップルになりたい相手を選んでね！'),
-                        Text(
-                          '「${manNameList[_counter]}」は誰を選ぶ？',
-                          style: Theme.of(context).textTheme.bodyLarge,
-                        ),
-                      ],
-                    ),
+                    children: [
+                      const Text('カップルになりたい相手を選んでね！'),
+                      Text(
+                        '「${manNameList[_counter]}」は誰を選ぶ？',
+                        style: Theme.of(context).textTheme.bodyLarge,
+                      ),
+                    ],
+                  ),
               const SizedBox(height: 40),
               (isFinished)
                   ? const Text('お楽しみに')
                   : SizedBox(
-                      width: _screenSize.width * 0.4,
-                      child: Form(
-                        key: _formKey,
-                        child: DropdownButtonFormField(
-                          validator: (value) {
-                            if (value == null) {
-                              return 'お相手を選んでね！';
-                            }
-                            return null;
-                          },
-                          hint: const Text('誰が良い？'),
-                          isExpanded: true,
-                          value: _selectedName,
-                          items: womanNameList
-                              .map((item) => DropdownMenuItem<String>(
+                    width: screenSize.width * 0.4,
+                    child: Form(
+                      key: _formKey,
+                      child: DropdownButtonFormField(
+                        key: ValueKey(_counter),
+                        validator: (value) {
+                          if (value == null) {
+                            return 'お相手を選んでね！';
+                          }
+                          return null;
+                        },
+                        hint: const Text('誰が良い？'),
+                        isExpanded: true,
+                        initialValue: _selectedName,
+                        items:
+                            womanNameList
+                                .map(
+                                  (item) => DropdownMenuItem<String>(
                                     alignment: AlignmentDirectional.center,
                                     value: item,
                                     child: Text(item),
-                                  ))
-                              .toList(),
-                          onChanged: (String? value) {
-                            setState(() {
-                              _selectedName = value;
-                            });
-                          },
-                        ),
+                                  ),
+                                )
+                                .toList(),
+                        onChanged: (String? value) {
+                          setState(() {
+                            _selectedName = value;
+                          });
+                        },
                       ),
                     ),
-              const SizedBox(
-                height: 30,
-              ),
+                  ),
+              const SizedBox(height: 30),
               SizedBox(
-                width: _screenSize.width * 0.7,
+                width: screenSize.width * 0.7,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Pallete.secondaryColor,
@@ -119,19 +120,21 @@ class _ChoiceWomanScreenState extends ConsumerState<ChoiceWomanScreen> {
                   onPressed: () {
                     if (!isFinished) {
                       if (_formKey.currentState!.validate()) {
-                        final int womanIndex =
-                            womanNameList.indexOf(_selectedName!);
-                        final int manIndex =
-                            manNameList.indexOf(manNameList[_counter]);
+                        final int womanIndex = womanNameList.indexOf(
+                          _selectedName!,
+                        );
+                        final int manIndex = manNameList.indexOf(
+                          manNameList[_counter],
+                        );
 
                         ref
-                            .watch(manSelectedIntProvider.notifier)
-                            .state[manIndex] = womanIndex;
+                                .watch(manSelectedIntProvider.notifier)
+                                .state[manIndex] =
+                            womanIndex;
                         ref
-                            .read(manSelectedProvider.notifier)
-                            .state[manNameList[_counter]] = _selectedName;
-                        print(manSelectedList);
-                        print(manSelectedIntList);
+                                .read(manSelectedProvider.notifier)
+                                .state[manNameList[_counter]] =
+                            _selectedName;
                         _incrementCounter(numberOfMember);
                       }
                     } else {

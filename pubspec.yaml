@@ -17,11 +17,11 @@ publish_to: "none" # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 1.1.0+10
+version: 1.1.1+11
 
 environment:
   sdk: ^3.7.0
-  flutter: ">=3.41.0"
+  flutter: ">=3.50.1"
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -38,11 +38,11 @@ dependencies:
   # 組織ポリシーに従い、監査済みの安定版へバージョンを固定する。
   cupertino_icons: 1.0.9
   flutter_riverpod: 3.3.2
-  google_fonts: 8.2.0
+  google_fonts: 9.0.0
   url_launcher: 6.3.2
-  # 2.4.8 は meta ^1.18.0 を要求し現行 Flutter SDK(meta 1.17.0) と非互換のため 2.4.7 に固定
   flutter_native_splash: 2.4.7
   shared_preferences: 2.5.5
+  material_ui: 1.11.1
 
 dev_dependencies:
   flutter_test:

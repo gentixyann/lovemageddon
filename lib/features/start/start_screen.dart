@@ -1,5 +1,5 @@
 import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:lovemageddon/features/faq/faq_screen.dart';
 import 'package:lovemageddon/features/number_members/number_members_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -9,7 +9,9 @@ class StartScreen extends StatelessWidget {
 
   void _moveStep(BuildContext ctx) {
     Navigator.pushReplacement(
-        ctx, MaterialPageRoute(builder: (ctx) => const NumberMembersScreen()));
+      ctx,
+      MaterialPageRoute(builder: (ctx) => const NumberMembersScreen()),
+    );
   }
 
   void _moveFaq(BuildContext ctx) {
@@ -18,20 +20,18 @@ class StartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var _screenSize = MediaQuery.of(context).size;
+    var screenSize = MediaQuery.of(context).size;
     return Scaffold(
       body: Center(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: _screenSize.width * 0.1),
+          padding: EdgeInsets.symmetric(horizontal: screenSize.width * 0.1),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               SizedBox(
-                width: _screenSize.width * 0.8,
-                height: _screenSize.height * 0.3,
-                child: Image.asset(
-                  'assets/images/title.png',
-                ),
+                width: screenSize.width * 0.8,
+                height: screenSize.height * 0.3,
+                child: Image.asset('assets/images/title.png'),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -39,9 +39,7 @@ class StartScreen extends StatelessWidget {
                   SizedBox(
                     width: 100,
                     height: 100,
-                    child: Image.asset(
-                      'assets/images/item2.png',
-                    ),
+                    child: Image.asset('assets/images/item2.png'),
                   ),
                   SizedBox(
                     width: 100,
@@ -50,13 +48,13 @@ class StartScreen extends StatelessWidget {
                       'assets/images/item1.png',
                       fit: BoxFit.cover,
                     ),
-                  )
+                  ),
                 ],
               ),
               const Text('カップル成立するかな？'),
               const SizedBox(height: 40),
               SizedBox(
-                width: _screenSize.width * 0.7,
+                width: screenSize.width * 0.7,
                 child: ElevatedButton(
                   onPressed: () => _moveStep(context),
                   child: const Text('スタート'),
@@ -64,7 +62,7 @@ class StartScreen extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               SizedBox(
-                width: _screenSize.width * 0.7,
+                width: screenSize.width * 0.7,
                 child: ElevatedButton(
                   onPressed: () => _moveFaq(context),
                   child: const Text('FAQなど'),
@@ -73,17 +71,20 @@ class StartScreen extends StatelessWidget {
               const SizedBox(height: 40),
               RichText(
                 text: TextSpan(
-                    style: const TextStyle(
-                      decoration: TextDecoration.underline,
-                      color: Colors.blue,
-                    ),
-                    text: "プライバシーポリシー",
-                    recognizer: TapGestureRecognizer()
-                      ..onTap = () async {
-                        final uri = Uri.parse(
-                            "https://jagged-blender-d57.notion.site/1658f34c2982813ab0d1e5e230077653");
-                        launchUrl(uri);
-                      }),
+                  style: const TextStyle(
+                    decoration: TextDecoration.underline,
+                    color: Colors.blue,
+                  ),
+                  text: "プライバシーポリシー",
+                  recognizer:
+                      TapGestureRecognizer()
+                        ..onTap = () async {
+                          final uri = Uri.parse(
+                            "https://jagged-blender-d57.notion.site/1658f34c2982813ab0d1e5e230077653",
+                          );
+                          launchUrl(uri);
+                        },
+                ),
               ),
             ],
           ),

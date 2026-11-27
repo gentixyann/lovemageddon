@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lovemageddon/features/final/final_screen.dart';
 import 'package:lovemageddon/features/result/widgets/man_circles.dart';
@@ -17,7 +17,7 @@ class ResultScreen extends ConsumerStatefulWidget {
 
 class _ResultScreenState extends ConsumerState<ResultScreen> {
   // 始点の縦軸（Y）のポジション
-  List<double> vertical_position = [-0.8, -0.5, -0.2, 0.1, 0.4];
+  List<double> verticalPosition = [-0.8, -0.5, -0.2, 0.1, 0.4];
   // 繋げるマルの横軸（X）のポジション
   List<double> connectHorizontalPosition = [-0.6, -0.3, 0.0, 0.3, 0.6];
   // 繋げるマルの始点の縦軸（Y）のポジション
@@ -37,15 +37,15 @@ class _ResultScreenState extends ConsumerState<ResultScreen> {
   List<double> createdVerticalPosition = [0.0, 0.0, 0.0, 0.0, 0.0];
 
   void createPosition(int numberOfMember) {
-    final Map<int, int?> womanSelectedIntList =
-        ref.watch(womanSelectedIntProvider);
+    final Map<int, int?> womanSelectedIntList = ref.watch(
+      womanSelectedIntProvider,
+    );
     final Map<int, int?> manSelectedIntList = ref.watch(manSelectedIntProvider);
     final int numberOfMember = ref.watch(numberProvider);
 
     final lastNum = numberOfMember - 1;
 
     if (_womenTurn) {
-      print('_startCounterです$_startCounter');
       // _startCounter番目の女性が選んだ男性のindex番号を取る
       final targetInt = womanSelectedIntList[_startCounter];
       final startPos = connectVerticalPosition[_startCounter];
@@ -53,18 +53,25 @@ class _ResultScreenState extends ConsumerState<ResultScreen> {
       final centerPos = (startPos + endPos) / 2;
       final leftPos = (startPos + centerPos) / 2;
       final rightPos = (centerPos + endPos) / 2;
-      createdVerticalPosition.replaceRange(0, createdVerticalPosition.length,
-          [startPos, leftPos, centerPos, rightPos, endPos]);
+      createdVerticalPosition.replaceRange(0, createdVerticalPosition.length, [
+        startPos,
+        leftPos,
+        centerPos,
+        rightPos,
+        endPos,
+      ]);
       // マッチ成功かを判定
       checkSuccess(targetInt, manSelectedIntList, numberOfMember);
     } else {
       if (_isFirst) {
         _startCounter = 0;
-        print('_startCounterです$_startCounter');
         // 男性側からスタートするためにX軸のListの順番を逆にする
         final reversedPosition = connectHorizontalPosition.reversed.toList();
         connectHorizontalPosition.replaceRange(
-            0, connectHorizontalPosition.length, reversedPosition);
+          0,
+          connectHorizontalPosition.length,
+          reversedPosition,
+        );
       }
       // _startCounter番目の男性が選んだ女性のindex番号を取る
       final targetInt = manSelectedIntList[_startCounter];
@@ -73,8 +80,13 @@ class _ResultScreenState extends ConsumerState<ResultScreen> {
       final centerPos = (startPos + endPos) / 2;
       final leftPos = (startPos + centerPos) / 2;
       final rightPos = (centerPos + endPos) / 2;
-      createdVerticalPosition.replaceRange(0, createdVerticalPosition.length,
-          [startPos, leftPos, centerPos, rightPos, endPos]);
+      createdVerticalPosition.replaceRange(0, createdVerticalPosition.length, [
+        startPos,
+        leftPos,
+        centerPos,
+        rightPos,
+        endPos,
+      ]);
       // マッチ成功かを判定
       checkSuccess(targetInt, womanSelectedIntList, numberOfMember);
       if (_startCounter == lastNum) {
@@ -84,7 +96,10 @@ class _ResultScreenState extends ConsumerState<ResultScreen> {
   }
 
   void checkSuccess(
-      int targetInt, Map<int, int?> manSelectedIntList, int numberOfMember) {
+    int targetInt,
+    Map<int, int?> manSelectedIntList,
+    int numberOfMember,
+  ) {
     final targetSelectedInt = manSelectedIntList[targetInt];
     Future.delayed(const Duration(seconds: 5), () {
       if (targetSelectedInt == _startCounter) {
@@ -117,8 +132,13 @@ class _ResultScreenState extends ConsumerState<ResultScreen> {
 
   void reset() {
     setState(() {
-      isShowCircle.replaceRange(
-          0, isShowCircle.length, [false, false, false, false, false]);
+      isShowCircle.replaceRange(0, isShowCircle.length, [
+        false,
+        false,
+        false,
+        false,
+        false,
+      ]);
     });
   }
 
@@ -138,7 +158,6 @@ class _ResultScreenState extends ConsumerState<ResultScreen> {
     if (_startCounter != lastNum) {
       _isFirst = false;
     } else {
-      print('女性のターン終わり。次は男性');
       _isFirst = true;
       _womenTurn = false;
     }
@@ -146,16 +165,17 @@ class _ResultScreenState extends ConsumerState<ResultScreen> {
 
   void _moveStep(BuildContext ctx) {
     Navigator.pushReplacement(
-        ctx, MaterialPageRoute(builder: (ctx) => const FinalScreen()));
+      ctx,
+      MaterialPageRoute(builder: (ctx) => const FinalScreen()),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    var _screenSize = MediaQuery.of(context).size;
+    var screenSize = MediaQuery.of(context).size;
     final int numberOfMember = ref.watch(numberProvider);
     final List<String> womanNameList = ref.watch(womanNameProvider);
     final List<String> manNameList = ref.watch(manNameProvider);
-    final lastNum = numberOfMember - 1;
 
     return Scaffold(
       body: Stack(
@@ -163,19 +183,21 @@ class _ResultScreenState extends ConsumerState<ResultScreen> {
         children: [
           for (var i = 0; i < numberOfMember; i++)
             WomanCircles(
-              verticalPosition: vertical_position[i],
+              verticalPosition: verticalPosition[i],
               womanName: womanNameList[i],
             ),
           for (var i = 0; i < numberOfMember; i++)
             ManCircles(
-              verticalPosition: vertical_position[i],
+              verticalPosition: verticalPosition[i],
               manName: manNameList[i],
             ),
           Visibility(
             visible: isShowCircle[0],
             child: Align(
               alignment: Alignment(
-                  connectHorizontalPosition[0], createdVerticalPosition[0]),
+                connectHorizontalPosition[0],
+                createdVerticalPosition[0],
+              ),
               child: Container(
                 width: 30,
                 height: 30,
@@ -190,7 +212,9 @@ class _ResultScreenState extends ConsumerState<ResultScreen> {
             visible: isShowCircle[1],
             child: Align(
               alignment: Alignment(
-                  connectHorizontalPosition[1], createdVerticalPosition[1]),
+                connectHorizontalPosition[1],
+                createdVerticalPosition[1],
+              ),
               child: Container(
                 width: 30,
                 height: 30,
@@ -205,7 +229,9 @@ class _ResultScreenState extends ConsumerState<ResultScreen> {
             visible: isShowCircle[2],
             child: Align(
               alignment: Alignment(
-                  connectHorizontalPosition[2], createdVerticalPosition[2]),
+                connectHorizontalPosition[2],
+                createdVerticalPosition[2],
+              ),
               child: Container(
                 width: 30,
                 height: 30,
@@ -220,7 +246,9 @@ class _ResultScreenState extends ConsumerState<ResultScreen> {
             visible: isShowCircle[3],
             child: Align(
               alignment: Alignment(
-                  connectHorizontalPosition[3], createdVerticalPosition[3]),
+                connectHorizontalPosition[3],
+                createdVerticalPosition[3],
+              ),
               child: Container(
                 width: 30,
                 height: 30,
@@ -235,7 +263,9 @@ class _ResultScreenState extends ConsumerState<ResultScreen> {
             visible: isShowCircle[4],
             child: Align(
               alignment: Alignment(
-                  connectHorizontalPosition[4], createdVerticalPosition[4]),
+                connectHorizontalPosition[4],
+                createdVerticalPosition[4],
+              ),
               child: Container(
                 width: 30,
                 height: 30,
@@ -249,18 +279,21 @@ class _ResultScreenState extends ConsumerState<ResultScreen> {
           Align(
             alignment: const Alignment(0.1, 0.6),
             child: SizedBox(
-              width: _screenSize.width * 0.7,
-              child: _isFinished
-                  ? ElevatedButton(
-                      onPressed: _inProgress ? null : () => _moveStep(context),
-                      child: const Text('次へ'),
-                    )
-                  : ElevatedButton(
-                      onPressed: _inProgress
-                          ? null
-                          : () => decidePosition(numberOfMember),
-                      child: const Text('モテマゲドン！'),
-                    ),
+              width: screenSize.width * 0.7,
+              child:
+                  _isFinished
+                      ? ElevatedButton(
+                        onPressed:
+                            _inProgress ? null : () => _moveStep(context),
+                        child: const Text('次へ'),
+                      )
+                      : ElevatedButton(
+                        onPressed:
+                            _inProgress
+                                ? null
+                                : () => decidePosition(numberOfMember),
+                        child: const Text('モテマゲドン！'),
+                      ),
             ),
           ),
           Visibility(
@@ -276,7 +309,7 @@ class _ResultScreenState extends ConsumerState<ResultScreen> {
               alignment: Alignment(0.0, 0.0),
               child: UnsuccessHeart(),
             ),
-          )
+          ),
         ],
       ),
     );

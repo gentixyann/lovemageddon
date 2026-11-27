@@ -1,12 +1,12 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class SlideSection extends StatelessWidget {
   const SlideSection({
-    Key? key,
+    super.key,
     required this.title,
     required this.description,
     required this.image,
-  }) : super(key: key);
+  });
 
   final String title;
   final String description;
@@ -29,10 +29,11 @@ class SlideSection extends StatelessWidget {
               height: deviceHeight * 0.35,
               width: double.infinity,
               decoration: BoxDecoration(
-                  image: DecorationImage(
-                fit: BoxFit.contain,
-                image: AssetImage(image),
-              )),
+                image: DecorationImage(
+                  fit: BoxFit.contain,
+                  image: AssetImage(image),
+                ),
+              ),
             ),
           ),
         ),
@@ -47,13 +48,7 @@ class SlideSection extends StatelessWidget {
             ),
           ),
         ),
-        Text(
-          description,
-          style: const TextStyle(
-            fontSize: 14,
-            height: 1.6,
-          ),
-        ),
+        Text(description, style: const TextStyle(fontSize: 14, height: 1.6)),
       ],
     );
   }

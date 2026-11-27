@@ -1,4 +1,3 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 // Riverpod 3.0 で StateProvider などのレガシー API は legacy.dart へ移動した。
 // 既存の状態管理の挙動を変えずに互換を保つため、こちらを読み込む。
 import 'package:flutter_riverpod/legacy.dart';
@@ -19,20 +18,23 @@ final manNameProvider = StateProvider<List<String>>((ref) {
 });
 
 // 女性参加者の選んだ相手
-final womanSelectedProvider =
-    StateProvider.autoDispose<Map<String, String?>>((ref) {
+final womanSelectedProvider = StateProvider.autoDispose<Map<String, String?>>((
+  ref,
+) {
   return {};
 });
 
-final womanSelectedIntProvider =
-    StateProvider.autoDispose<Map<int, int?>>((ref) {
+final womanSelectedIntProvider = StateProvider.autoDispose<Map<int, int?>>((
+  ref,
+) {
   ref.keepAlive();
   return {};
 });
 
 // 男性参加者の選んだ相手
-final manSelectedProvider =
-    StateProvider.autoDispose<Map<String, String?>>((ref) {
+final manSelectedProvider = StateProvider.autoDispose<Map<String, String?>>((
+  ref,
+) {
   return {};
 });
 
